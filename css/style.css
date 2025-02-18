@@ -1,0 +1,98 @@
+main,
+body,
+p,
+ul,
+ol,
+li,
+span,
+section,
+div,
+header,
+footer,
+article {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", sans-serif;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  padding: 100px;
+  box-sizing: border-box;
+  background-color: #000;
+  color: #ffd974;
+  text-transform: uppercase;
+}
+.intro > * {
+  display: flex;
+  justify-content: center;
+}
+.intro *::selection {
+  background-color: #ffd974;
+  color: #000;
+}
+.intro > .slot_box {
+  position: relative;
+  font-family: "Noto Emoji", sans-serif;
+  font-size: 100px;
+  font-weight: 100;
+  margin-bottom: 150px;
+}
+.intro > .slot_box::before {
+  content: "";
+  position: absolute;
+  left: 13px;
+  top: 32px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: box-shadow 1s linear;
+}
+.intro > .slot_box.shine::before {
+  box-shadow: 0px 0px 75px #ffd974;
+}
+.intro > .moon_list {
+  display: flex;
+  justify-content: center;
+}
+.intro > .moon_list > li {
+  font-family: "Noto Emoji", sans-serif;
+}
+.intro > p:nth-of-type(1) {
+  font-size: 90px;
+  font-weight: 100;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.intro > p:nth-of-type(2) {
+  font-size: 70px;
+  font-weight: 100;
+  letter-spacing: 20px;
+}
+.intro > p:nth-of-type(3) {
+  font-size: 30px;
+  font-weight: 300;
+}
+.intro .background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  mix-blend-mode: multiply;
+}
+
+.site_list .swiper_site_list {
+  width: 100%;
+  height: 100vh;
+}
+
+/*# sourceMappingURL=style.css.map */
