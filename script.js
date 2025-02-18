@@ -3,7 +3,7 @@ const todayDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
 
 let todayMoonIdx;
 const dataApiUrl =
-  "http://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo";
+  "https://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo";
 const dataApiKey =
   "?ServiceKey=68%2BtOC0gNDUQjLJUHWznKNCwXD8Wy04hWoQH%2Bl%2FI9Rhne17jw9Rljp1xNppnXbFUrXTsNKJpZWeIA9lv2RJVxQ%3D%3D";
 const year = "&solYear=" + today.getFullYear();
