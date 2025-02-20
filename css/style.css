@@ -69,6 +69,7 @@ ol {
 }
 
 .intro {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,6 +94,33 @@ ol {
   background-color: #ffd974;
   color: #000;
 }
+.intro p:nth-of-type(2) {
+  font-size: 90px;
+  font-weight: 100;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.intro p:nth-of-type(3) {
+  font-size: 70px;
+  font-weight: 100;
+  letter-spacing: 20px;
+}
+.intro p:nth-of-type(4) {
+  font-size: 30px;
+  font-weight: 300;
+}
+.intro .deco_txt {
+  position: absolute;
+  top: 27px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 200;
+}
+.intro .deco_txt span {
+  display: inline-block;
+  margin-left: 2.5px;
+  font-weight: inherit;
+}
 .intro > .slot_box {
   position: relative;
   font-family: "Noto Emoji", sans-serif;
@@ -110,26 +138,6 @@ ol {
 }
 .intro > .moon_list > li {
   font-family: "Noto Emoji", sans-serif;
-}
-.intro > p:nth-of-type(1) {
-  font-size: 90px;
-  font-weight: 100;
-  font-family: "Noto Sans TC", sans-serif;
-}
-.intro > p:nth-of-type(2) {
-  font-size: 70px;
-  font-weight: 100;
-  letter-spacing: 20px;
-}
-.intro > p:nth-of-type(3) {
-  font-size: 30px;
-  font-weight: 300;
-}
-.intro .background {
-  position: absolute;
-  left: 0;
-  top: 0;
-  mix-blend-mode: multiply;
 }
 
 .site_list .swiper_site_list {
@@ -214,31 +222,40 @@ ol {
   .intro {
     padding: 2rem;
   }
-  .intro > .slot_box {
-    font-size: 9rem;
-    margin-bottom: 5rem;
-  }
-  .intro > .slot_box::before {
-    width: 8.8rem;
-    height: 8.8rem;
-  }
-  .intro > p:nth-of-type(1) {
-    font-size: 4rem;
+  .intro > p {
+    width: 100%;
   }
   .intro > p:nth-of-type(2) {
+    font-size: 4rem;
+  }
+  .intro > p:nth-of-type(3) {
     font-size: 2rem;
     letter-spacing: 0.5rem;
     margin-bottom: 0.5rem;
   }
-  .intro > p:nth-of-type(3) {
+  .intro > p:nth-of-type(4) {
     font-size: 0.8rem;
     margin-bottom: 1rem;
   }
-  .intro > p:nth-of-type(4) {
-    font-size: 1.5rem;
+  .intro > p:nth-of-type(5) {
+    font-size: 1.3rem;
     font-weight: 200;
     text-align: center;
     word-break: keep-all;
+  }
+  .intro .slot_box {
+    font-size: 9rem;
+    margin-bottom: 5rem;
+  }
+  .intro .deco_txt {
+    position: absolute;
+    top: 6vh;
+    width: 40%;
+    flex-wrap: wrap;
+    font-size: 2.1vh;
+  }
+  .intro .deco_txt span {
+    margin-left: 0.2rem;
   }
   .site_list .swiper_site_list .swiper_slide h2 {
     font-size: 2rem;
@@ -282,5 +299,47 @@ ol {
   }
   .site_list .swiper_site_list .swiper_slide ul li:not(:last-child) {
     margin-bottom: 1rem;
+  }
+  .narrow .intro::before, .narrow .intro::after {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #ffd974;
+    transform: translateX(-50%);
+    content: "";
+  }
+  .narrow .intro::before {
+    border-radius: 50%;
+  }
+  .narrow .intro::after {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(-45deg) translate(0.6rem, -0.6rem);
+    transform-origin: left bottom;
+  }
+  .narrow .intro > p:nth-of-type(2) {
+    font-size: 4.5rem;
+  }
+  .narrow .intro > p:nth-of-type(3) {
+    font-size: 2.5rem;
+  }
+  .narrow .intro > p:nth-of-type(4) {
+    font-size: 1rem;
+  }
+  .narrow .intro > p:nth-of-type(5) {
+    font-size: 1.5rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+  .narrow .intro .slot_box {
+    font-size: 12rem;
+    margin-bottom: 5.5rem;
+  }
+  .narrow .intro .moon_list li {
+    font-size: 1rem;
   }
 }/*# sourceMappingURL=style.css.map */
