@@ -31,7 +31,45 @@ ol {
   list-style: none;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 15px 0;
+  box-sizing: border-box;
+  z-index: 10;
+}
+.header h1,
+.header nav {
+  color: #ffd974;
+}
+.header h1 {
+  font-weight: 100;
+}
+.header nav button {
+  background-color: transparent;
+  padding: 5px;
+  border: 1px solid #ffd974;
+  border-radius: 3px;
+  color: #ffd974;
+}
+.header nav .navi_btn {
+  width: 50px;
+  height: 50px;
+  background-color: #ffd974;
+  border-radius: 50%;
+  transition: box-shadow 1s linear;
+  box-shadow: -20px 0 0 #000 inset;
+}
+.header nav .navi_btn.active {
+  box-shadow: 20px 0 0 #000 inset, 0 0 25px #ffd974;
+}
+
 .intro {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -48,31 +86,51 @@ ol {
   display: flex;
   justify-content: center;
 }
+.intro *::-moz-selection {
+  background-color: #ffd974;
+  color: #000;
+}
 .intro *::selection {
   background-color: #ffd974;
   color: #000;
 }
+.intro p:nth-of-type(2) {
+  font-size: 90px;
+  font-weight: 100;
+  font-family: "Noto Sans TC", sans-serif;
+}
+.intro p:nth-of-type(3) {
+  font-size: 70px;
+  font-weight: 100;
+  letter-spacing: 20px;
+}
+.intro p:nth-of-type(4) {
+  font-size: 30px;
+  font-weight: 300;
+}
+.intro .deco_txt {
+  position: absolute;
+  top: 27px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 18px;
+  font-weight: 200;
+}
+.intro .deco_txt span {
+  display: inline-block;
+  margin-left: 2.5px;
+  font-weight: inherit;
+}
 .intro > .slot_box {
   position: relative;
   font-family: "Noto Emoji", sans-serif;
-  font-size: 100px;
+  font-size: 130px;
   font-weight: 100;
-  margin-bottom: 150px;
+  margin-bottom: 100px;
+  transition: text-shadow 1s linear;
 }
-.intro > .slot_box::before {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transform: translate(-50%, -41%);
-  background-color: transparent;
-  transition: box-shadow 1s linear;
-}
-.intro > .slot_box.shine::before {
-  box-shadow: 0px 0px 75px #ffd974;
+.intro > .slot_box.shine {
+  text-shadow: 0 0 75px #ffd974, 0 0 5px #ffecb8, 0 0 3px #ffd974;
 }
 .intro > .moon_list {
   display: flex;
@@ -80,26 +138,6 @@ ol {
 }
 .intro > .moon_list > li {
   font-family: "Noto Emoji", sans-serif;
-}
-.intro > p:nth-of-type(1) {
-  font-size: 90px;
-  font-weight: 100;
-  font-family: "Noto Sans TC", sans-serif;
-}
-.intro > p:nth-of-type(2) {
-  font-size: 70px;
-  font-weight: 100;
-  letter-spacing: 20px;
-}
-.intro > p:nth-of-type(3) {
-  font-size: 30px;
-  font-weight: 300;
-}
-.intro .background {
-  position: absolute;
-  left: 0;
-  top: 0;
-  mix-blend-mode: multiply;
 }
 
 .site_list .swiper_site_list {
@@ -125,12 +163,14 @@ ol {
 .site_list .swiper_site_list .swiper_slide figure img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .site_list .swiper_site_list .swiper_slide h2 {
   position: relative;
   color: #fff;
   font-size: 40px;
+  font-weight: 700;
   margin-bottom: 20px;
 }
 .site_list .swiper_site_list .swiper_slide ul {
@@ -156,7 +196,8 @@ ol {
 .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(4) {
   display: flex;
   justify-content: center;
-  column-gap: 20px;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
   margin-top: 20px;
 }
 .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(4) a {
@@ -181,31 +222,40 @@ ol {
   .intro {
     padding: 2rem;
   }
-  .intro > .slot_box {
-    font-size: 9rem;
-    margin-bottom: 5rem;
-  }
-  .intro > .slot_box::before {
-    width: 8.8rem;
-    height: 8.8rem;
-  }
-  .intro > p:nth-of-type(1) {
-    font-size: 4rem;
+  .intro > p {
+    width: 100%;
   }
   .intro > p:nth-of-type(2) {
+    font-size: 4rem;
+  }
+  .intro > p:nth-of-type(3) {
     font-size: 2rem;
     letter-spacing: 0.5rem;
     margin-bottom: 0.5rem;
   }
-  .intro > p:nth-of-type(3) {
+  .intro > p:nth-of-type(4) {
     font-size: 0.8rem;
     margin-bottom: 1rem;
   }
-  .intro > p:nth-of-type(4) {
-    font-size: 1.5rem;
+  .intro > p:nth-of-type(5) {
+    font-size: 1.3rem;
     font-weight: 200;
     text-align: center;
     word-break: keep-all;
+  }
+  .intro .slot_box {
+    font-size: 9rem;
+    margin-bottom: 5rem;
+  }
+  .intro .deco_txt {
+    position: absolute;
+    top: 6vh;
+    width: 40%;
+    flex-wrap: wrap;
+    font-size: 2.1vh;
+  }
+  .intro .deco_txt span {
+    margin-left: 0.2rem;
   }
   .site_list .swiper_site_list .swiper_slide h2 {
     font-size: 2rem;
@@ -238,7 +288,8 @@ ol {
     -webkit-box-orient: vertical;
   }
   .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(4) {
-    column-gap: 2rem;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem;
     margin-top: 2rem;
   }
   .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(4) a {
@@ -249,6 +300,46 @@ ol {
   .site_list .swiper_site_list .swiper_slide ul li:not(:last-child) {
     margin-bottom: 1rem;
   }
-}
-
-/*# sourceMappingURL=style.css.map */
+  .narrow .intro::before, .narrow .intro::after {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid #ffd974;
+    transform: translateX(-50%);
+    content: "";
+  }
+  .narrow .intro::before {
+    border-radius: 50%;
+  }
+  .narrow .intro::after {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    transform: rotate(-45deg) translate(0.6rem, -0.6rem);
+    transform-origin: left bottom;
+  }
+  .narrow .intro > p:nth-of-type(2) {
+    font-size: 4.5rem;
+  }
+  .narrow .intro > p:nth-of-type(3) {
+    font-size: 2.5rem;
+  }
+  .narrow .intro > p:nth-of-type(4) {
+    font-size: 1rem;
+  }
+  .narrow .intro > p:nth-of-type(5) {
+    font-size: 1.5rem;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+  }
+  .narrow .intro .slot_box {
+    font-size: 12rem;
+    margin-bottom: 5.5rem;
+  }
+  .narrow .intro .moon_list li {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=style.css.map */

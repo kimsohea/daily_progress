@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,9 +19,25 @@
 
   <body>
     <div class="wrapper">
-      <header class="header"></header>
+      <header class="header">
+        <h1>日就月將</h1>
+        <nav>
+          <button class="navi_btn"></button>
+          <ul>
+            <li><button>intro</button></li>
+            <li><button>site list</button></li>
+            <li><button>my project</button></li>
+            <li><button>outtro</button></li>
+          </ul>
+          <button>Go Top</button>
+        </nav>
+      </header>
       <main class="main">
         <section class="intro">
+          <p class="deco_txt">
+            오늘은 음력 <span class="lun_info"></span>일로
+            <span class="lun_name"></span>이 뜹니다.
+          </p>
           <h1 class="slot_box"></h1>
           <ul class="moon_list">
             <li>🌑</li>
@@ -317,7 +335,32 @@
             </swiper-slide>
           </swiper-container>
         </section>
+        <section class="my_project">
+          <ul>
+            <li>
+              <figure></figure>
+            </li>
+          </ul>
+        </section>
       </main>
+      <footer>
+        <ul>
+          <li>
+            <p>kakao Id: kimsohea4425</p>
+          </li>
+          <li>
+            <a href="mailto:kimsohea4425@gmail.com">kimsohea4425@gmail.com</a>
+          </li>
+          <li>
+            <p>github Id: kimsohea4425@gmail.com</p>
+          </li>
+          <li>
+            <a href="https://github.com/kimsohea" target="_blank"
+              >github page 바로가기</a
+            ><br />
+          </li>
+        </ul>
+      </footer>
     </div>
   </body>
 </html>

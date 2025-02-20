@@ -33,7 +33,52 @@ ol {
   list-style: none;
 }
 
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px 15px 0;
+  box-sizing: border-box;
+  z-index: 10;
+
+  h1,
+  nav {
+    color: #ffd974;
+  }
+
+  h1 {
+    font-weight: 100;
+  }
+
+  nav {
+    button {
+      background-color: transparent;
+      padding: 5px;
+      border: 1px solid #ffd974;
+      border-radius: 3px;
+      color: #ffd974;
+    }
+
+    .navi_btn {
+      width: 50px;
+      height: 50px;
+      background-color: #ffd974;
+      border-radius: 50%;
+      transition: box-shadow 1s linear;
+      box-shadow: -20px 0 0 #000 inset;
+
+      &.active {
+        box-shadow: 20px 0 0 #000 inset, 0 0 25px #ffd974;
+      }
+    }
+  }
+}
+
 .intro {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -56,30 +101,50 @@ ol {
     color: #000;
   }
 
+  p {
+    &:nth-of-type(2) {
+      font-size: 90px;
+      font-weight: 100;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+
+    &:nth-of-type(3) {
+      font-size: 70px;
+      font-weight: 100;
+      letter-spacing: 20px;
+    }
+
+    &:nth-of-type(4) {
+      font-size: 30px;
+      font-weight: 300;
+    }
+  }
+
+  .deco_txt {
+    position: absolute;
+    top: 27px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    font-weight: 200;
+
+    span {
+      display: inline-block;
+      margin-left: 2.5px;
+      font-weight: inherit;
+    }
+  }
+
   > .slot_box {
     position: relative;
     font-family: "Noto Emoji", sans-serif;
-    font-size: 100px;
+    font-size: 130px;
     font-weight: 100;
-    margin-bottom: 150px;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      transform: translate(-50%, -41%);
-      background-color: transparent;
-      transition: box-shadow 1s linear;
-    }
+    margin-bottom: 100px;
+    transition: text-shadow 1s linear;
 
     &.shine {
-      &::before {
-        box-shadow: 0px 0px 75px #ffd974;
-      }
+      text-shadow: 0 0 75px #ffd974, 0 0 5px #ffecb8, 0 0 3px #ffd974;
     }
   }
 
@@ -90,32 +155,6 @@ ol {
     > li {
       font-family: "Noto Emoji", sans-serif;
     }
-  }
-
-  & > p {
-    &:nth-of-type(1) {
-      font-size: 90px;
-      font-weight: 100;
-      font-family: "Noto Sans TC", sans-serif;
-    }
-
-    &:nth-of-type(2) {
-      font-size: 70px;
-      font-weight: 100;
-      letter-spacing: 20px;
-    }
-
-    &:nth-of-type(3) {
-      font-size: 30px;
-      font-weight: 300;
-    }
-  }
-
-  .background {
-    position: absolute;
-    left: 0;
-    top: 0;
-    mix-blend-mode: multiply;
   }
 }
 
@@ -151,6 +190,7 @@ ol {
         position: relative;
         color: #fff;
         font-size: 40px;
+        font-weight: 700;
         margin-bottom: 20px;
       }
 
@@ -213,37 +253,46 @@ ol {
   .intro {
     padding: 2rem;
 
-    > .slot_box {
-      font-size: 9rem;
-      margin-bottom: 5rem;
+    > p {
+      width: 100%;
 
-      &::before {
-        width: 8.8rem;
-        height: 8.8rem;
-      }
-    }
-
-    & > p {
-      &:nth-of-type(1) {
+      &:nth-of-type(2) {
         font-size: 4rem;
       }
 
-      &:nth-of-type(2) {
+      &:nth-of-type(3) {
         font-size: 2rem;
         letter-spacing: 0.5rem;
         margin-bottom: 0.5rem;
       }
 
-      &:nth-of-type(3) {
+      &:nth-of-type(4) {
         font-size: 0.8rem;
         margin-bottom: 1rem;
       }
 
-      &:nth-of-type(4) {
-        font-size: 1.5rem;
+      &:nth-of-type(5) {
+        font-size: 1.3rem;
         font-weight: 200;
         text-align: center;
         word-break: keep-all;
+      }
+    }
+
+    .slot_box {
+      font-size: 9rem;
+      margin-bottom: 5rem;
+    }
+
+    .deco_txt {
+      position: absolute;
+      top: 6vh;
+      width: 40%;
+      flex-wrap: wrap;
+      font-size: 2.1vh;
+
+      span {
+        margin-left: 0.2rem;
       }
     }
   }
@@ -301,6 +350,66 @@ ol {
               margin-bottom: 1rem;
             }
           }
+        }
+      }
+    }
+  }
+
+  .narrow {
+    .intro {
+      &::before,
+      &::after {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        width: 2rem;
+        height: 2rem;
+        border: 1px solid #ffd974;
+        transform: translateX(-50%);
+        content: "";
+      }
+
+      &::before {
+        border-radius: 50%;
+      }
+
+      &::after {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-top-color: transparent;
+        border-right-color: transparent;
+        transform: rotate(-45deg) translate(0.6rem, -0.6rem);
+        transform-origin: left bottom;
+      }
+
+      > p {
+        &:nth-of-type(2) {
+          font-size: 4.5rem;
+        }
+
+        &:nth-of-type(3) {
+          font-size: 2.5rem;
+        }
+
+        &:nth-of-type(4) {
+          font-size: 1rem;
+        }
+
+        &:nth-of-type(5) {
+          font-size: 1.5rem;
+          padding: 0 1.5rem;
+          box-sizing: border-box;
+        }
+      }
+
+      .slot_box {
+        font-size: 12rem;
+        margin-bottom: 5.5rem;
+      }
+
+      .moon_list {
+        li {
+          font-size: 1rem;
         }
       }
     }
