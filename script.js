@@ -68,6 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
     } else console.log("failed");
   };
 
+  const screenWrap = document.querySelector(".wrapper");
+  const winWidth = window.innerWidth;
+  const winHeight = window.innerHeight;
+  if (winWidth < 1081 && winHeight > 750) screenWrap.classList.add("narrow");
+
   let slotNum = 0;
   let slotStop = 0;
   const slotBox = document.querySelector(".slot_box");
