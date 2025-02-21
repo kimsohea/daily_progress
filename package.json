@@ -6,7 +6,7 @@
   "author": "kimsohea <kimsohea4425@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "scss": "sass --watch css/style.scss css/style.css"
+    "scss": "sass --watch"
   },
   "devDependencies": {
     "sass": "^1.85.0"
