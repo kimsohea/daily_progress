@@ -88,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const navi = document.querySelector(".navi");
 	navi.addEventListener("click", function () {
 		headerFlg = headerFlg ? false : true;
-		this.classList.add("active");
+		if (headerFlg) this.classList.add("active");
+		else this.classList.remove("active");
 	});
 });
