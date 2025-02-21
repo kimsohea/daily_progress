@@ -91,4 +91,15 @@ document.addEventListener("DOMContentLoaded", () => {
 		if (headerFlg) this.classList.add("active");
 		else this.classList.remove("active");
 	});
+
+	const sectionArr = [];
+	const navList = document.querySelectorAll(".navi .nav_ul li");
+	document.querySelectorAll(".main>section").forEach((el) => sectionArr.push(el.offsetTop));
+	document.addEventListener("scroll", () => {
+		const scrollTop = window.scrollY;
+		navList.forEach((el, idx, arr) => {
+			if (scrollTop >= sectionArr[idx]) el.classList.add("active");
+			if (scrollTop < sectionArr[idx]) arr[idx].classList.remove("active");
+		});
+	});
 });

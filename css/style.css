@@ -16,7 +16,8 @@ div,
 header,
 footer,
 article,
-figure {
+figure,
+button {
   margin: 0;
   padding: 0;
   font-family: "Noto Sans KR", sans-serif;
@@ -84,15 +85,45 @@ ol {
 .header .navi .nav_ul {
   position: fixed;
   top: 50%;
-  right: 10px;
-  margin-top: 10px;
+  right: 25px;
   transform: translateY(-50%);
 }
 .header .navi .nav_ul li {
-  text-align: center;
+  position: relative;
+  text-align: right;
 }
 .header .navi .nav_ul li button {
   border: 0;
+  font-size: 18px;
+  font-weight: 100;
+  text-transform: capitalize;
+}
+.header .navi .nav_ul li::before, .header .navi .nav_ul li::after {
+  position: absolute;
+  top: 50%;
+  right: -10px;
+  width: 3px;
+  height: 3px;
+  background-color: #ffd974;
+  transform: translateY(50%);
+  content: "";
+}
+.header .navi .nav_ul li::before {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.header .navi .nav_ul li::after {
+  top: 9px;
+  right: -7.5px;
+  width: 0.5px;
+  height: 48px;
+}
+.header .navi .nav_ul li:last-child::after {
+  display: none;
+}
+.header .navi .nav_ul li:not(:last-child) {
+  margin-bottom: 20px;
 }
 .header .navi.active::before {
   height: 100vh;

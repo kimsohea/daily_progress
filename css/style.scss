@@ -18,7 +18,8 @@ div,
 header,
 footer,
 article,
-figure {
+figure,
+button {
 	margin: 0;
 	padding: 0;
 	font-family: "Noto Sans KR", sans-serif;
@@ -91,15 +92,53 @@ ol {
 		.nav_ul {
 			position: fixed;
 			top: 50%;
-			right: 10px;
-			margin-top: 10px;
+			right: 25px;
 			transform: translateY(-50%);
 
 			li {
-				text-align: center;
+				position: relative;
+				text-align: right;
 
 				button {
 					border: 0;
+					font-size: 18px;
+					font-weight: 100;
+					text-transform: capitalize;
+				}
+
+				&::before,
+				&::after {
+					position: absolute;
+					top: 50%;
+					right: -10px;
+					width: 3px;
+					height: 3px;
+					background-color: #ffd974;
+					transform: translateY(50%);
+					content: "";
+				}
+
+				&::before {
+					width: 5px;
+					height: 5px;
+					border-radius: 50%;
+				}
+
+				&::after {
+					top: 9px;
+					right: -7.5px;
+					width: 0.5px;
+					height: 48px;
+				}
+
+				&:last-child {
+					&::after {
+						display: none;
+					}
+				}
+
+				&:not(:last-child) {
+					margin-bottom: 20px;
 				}
 			}
 		}
