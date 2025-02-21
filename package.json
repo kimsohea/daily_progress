@@ -1,0 +1,14 @@
+{
+  "name": "daily_progress",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/kimsohea/daily_progress.git",
+  "author": "kimsohea <kimsohea4425@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "scss": "sass --watch css/style.scss css/style.css"
+  },
+  "devDependencies": {
+    "sass": "^1.85.0"
+  }
+}
