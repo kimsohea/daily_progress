@@ -92,14 +92,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		else this.classList.remove("active");
 	});
 
+	// 스크롤시 네비게이션 활성화
+	const heightHalf = winHeight / 2;
 	const sectionArr = [];
 	const navList = document.querySelectorAll(".navi .nav_ul li");
-	document.querySelectorAll(".main>section").forEach((el) => sectionArr.push(el.offsetTop));
+	let navIdx = 0;
+	document.querySelectorAll(".main>section").forEach((el, idx) => {
+		if (idx === 0) sectionArr.push(el.offsetTop);
+		else sectionArr.push(el.offsetTop - heightHalf);
+	});
 	document.addEventListener("scroll", () => {
-		const scrollTop = window.scrollY;
-		navList.forEach((el, idx, arr) => {
-			if (scrollTop >= sectionArr[idx]) el.classList.add("active");
-			if (scrollTop < sectionArr[idx]) arr[idx].classList.remove("active");
-		});
+		const scrTop = window.scrollY;
+
+		navList.forEach((item) => item.classList.remove("active"));
+		if (scrTop > sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
+		else if (scrTop > sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
+		else if (scrTop > sectionArr[2]) navIdx = 2;
+		navList[navIdx].classList.add("active");
 	});
 });

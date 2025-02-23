@@ -133,6 +133,10 @@ ol {
   box-shadow: 20px 0 0 #000 inset, 0 0 25px #ffd974;
 }
 
+.main section {
+  height: 100vh;
+}
+
 .intro {
   position: relative;
   display: flex;
