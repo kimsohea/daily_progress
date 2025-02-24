@@ -110,4 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		else if (scrTop > sectionArr[2]) navIdx = 2;
 		navList[navIdx].classList.add("active");
 	});
+
+	// 네비게이션 버튼 클릭시 이동
+	navList.forEach((item, idx) => item.addEventListener("click", (btn) => console.log(btn, idx)));
 });

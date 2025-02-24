@@ -92,53 +92,47 @@ ol {
 		.nav_ul {
 			position: fixed;
 			top: 50%;
-			right: 25px;
+			right: 0;
 			transform: translateY(-50%);
 
 			li {
 				position: relative;
-				text-align: right;
 
 				button {
+					text-align: right;
 					border: 0;
 					font-size: 18px;
 					font-weight: 100;
 					text-transform: capitalize;
-				}
-
-				&::before,
-				&::after {
-					position: absolute;
-					top: 50%;
-					right: -10px;
-					width: 3px;
-					height: 3px;
-					background-color: #ffd974;
-					transform: translateY(50%);
-					content: "";
+					transform: translateX(150%);
+					transition: transform 1s linear;
 				}
 
 				&::before {
-					width: 5px;
-					height: 5px;
+					position: absolute;
+					top: calc(50% - 5px);
+					right: 10px;
+					width: 3px;
+					height: 3px;
 					border-radius: 50%;
-				}
-
-				&::after {
-					top: 9px;
-					right: -7.5px;
-					width: 0.5px;
-					height: 48px;
-				}
-
-				&:last-child {
-					&::after {
-						display: none;
-					}
+					background-color: #ffd974;
+					transform: translateY(50%);
+					transition: box-shadow 0.5s linear;
+					content: "";
 				}
 
 				&:not(:last-child) {
-					margin-bottom: 20px;
+					padding-bottom: 20px;
+				}
+
+				&.active {
+					button {
+						transform: translateX(0);
+					}
+
+					&::before {
+						box-shadow: 0 0 5px 1px #ffd974, 0 0 15px 5px #ffd974;
+					}
 				}
 			}
 		}
@@ -239,6 +233,7 @@ ol {
 
 		> li {
 			font-family: "Noto Emoji", sans-serif;
+			font-weight: 100;
 		}
 	}
 }
@@ -333,6 +328,9 @@ ol {
 @media (max-width: 1080px) {
 	body {
 		font-size: 3.125vw;
+	}
+
+	.header {
 	}
 
 	.intro {
@@ -495,6 +493,33 @@ ol {
 			.moon_list {
 				li {
 					font-size: 1rem;
+				}
+			}
+		}
+	}
+}
+
+@media (min-width: 500px) and (max-width: 1080px) {
+	.site_list {
+		.swiper_site_list {
+			.swiper_slide {
+				ul {
+					li {
+						&:nth-of-type(2) {
+							padding: 0 12rem;
+						}
+
+						&:nth-of-type(3) {
+							padding: 0 12rem;
+						}
+
+						&:nth-of-type(4) {
+							a {
+								width: 12rem;
+								height: 3rem;
+							}
+						}
+					}
 				}
 			}
 		}
