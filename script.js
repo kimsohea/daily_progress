@@ -111,6 +111,18 @@ document.addEventListener("DOMContentLoaded", () => {
 		navList[navIdx].classList.add("active");
 	});
 
-	// 네비게이션 버튼 클릭시 이동
-	navList.forEach((item, idx) => item.addEventListener("click", (btn) => console.log(btn, idx)));
+	// 네비게이션 버튼 클릭시 스크롤
+	const sectionTopArr = [];
+	const navBtn = document.querySelectorAll(".navi .nav_ul li button");
+	document.querySelectorAll(".main>section").forEach((el) => sectionTopArr.push(el.offsetTop));
+	navBtn.forEach((item, idx) =>
+		item.addEventListener("click", () =>
+			window.scrollTo({ top: sectionTopArr[idx], behavior: "smooth" })
+		)
+	);
+
+	// 최상단 버튼 스크롤
+	document
+		.querySelector(".navi .top")
+		.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 });

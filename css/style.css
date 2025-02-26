@@ -86,23 +86,34 @@ ol {
   position: fixed;
   top: 50%;
   right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   transform: translateY(-50%);
+  pointer-events: none;
 }
 .header .navi .nav_ul li {
   position: relative;
+  width: fit-content;
+  height: fit-content;
+  padding-right: 25px;
+  text-align: right;
 }
 .header .navi .nav_ul li button {
-  text-align: right;
+  display: block;
   border: 0;
+  opacity: 0;
+  visibility: hidden;
   font-size: 18px;
   font-weight: 100;
   text-transform: capitalize;
-  transform: translateX(150%);
-  transition: transform 1s linear;
+  color: #000;
+  transition: color 0.5s linear, opacity 0.5s linear;
+  cursor: pointer;
 }
 .header .navi .nav_ul li::before {
   position: absolute;
-  top: calc(50% - 5px);
+  top: calc(50% - 10px);
   right: 10px;
   width: 3px;
   height: 3px;
@@ -116,7 +127,9 @@ ol {
   padding-bottom: 20px;
 }
 .header .navi .nav_ul li.active button {
-  transform: translateX(0);
+  opacity: 1;
+  visibility: visible;
+  color: #ffd974;
 }
 .header .navi .nav_ul li.active::before {
   box-shadow: 0 0 5px 1px #ffd974, 0 0 15px 5px #ffd974;
@@ -127,6 +140,14 @@ ol {
 }
 .header .navi.active .navi_btn {
   box-shadow: 20px 0 0 #000 inset, 0 0 25px #ffd974;
+}
+.header .navi.active .nav_ul {
+  pointer-events: auto;
+}
+.header .navi.active .nav_ul li button {
+  opacity: 1;
+  visibility: visible;
+  color: #ffd974;
 }
 
 .main section {

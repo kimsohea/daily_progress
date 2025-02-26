@@ -93,24 +93,35 @@ ol {
 			position: fixed;
 			top: 50%;
 			right: 0;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
 			transform: translateY(-50%);
+			pointer-events: none;
 
 			li {
 				position: relative;
+				width: fit-content;
+				height: fit-content;
+				padding-right: 25px;
+				text-align: right;
 
 				button {
-					text-align: right;
+					display: block;
 					border: 0;
+					opacity: 0;
+					visibility: hidden;
 					font-size: 18px;
 					font-weight: 100;
 					text-transform: capitalize;
-					transform: translateX(150%);
-					transition: transform 1s linear;
+					color: #000;
+					transition: color 0.5s linear, opacity 0.5s linear;
+					cursor: pointer;
 				}
 
 				&::before {
 					position: absolute;
-					top: calc(50% - 5px);
+					top: calc(50% - 10px);
 					right: 10px;
 					width: 3px;
 					height: 3px;
@@ -127,7 +138,9 @@ ol {
 
 				&.active {
 					button {
-						transform: translateX(0);
+						opacity: 1;
+						visibility: visible;
+						color: #ffd974;
 					}
 
 					&::before {
@@ -145,6 +158,18 @@ ol {
 
 			.navi_btn {
 				box-shadow: 20px 0 0 #000 inset, 0 0 25px #ffd974;
+			}
+
+			.nav_ul {
+				pointer-events: auto;
+
+				li {
+					button {
+						opacity: 1;
+						visibility: visible;
+						color: #ffd974;
+					}
+				}
 			}
 		}
 	}
