@@ -1,5 +1,3 @@
-import Swiper from "swiper";
-
 // date var
 const today = new Date();
 const todayDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
@@ -105,21 +103,12 @@ document.addEventListener("DOMContentLoaded", function () {
 	});
 
 	// 최상단 버튼 스크롤
-	this.querySelector(".navi .top").addEventListener("click", scrollEvent(0));
+	const topBtn = this.querySelector(".navi .top");
+	topBtn.addEventListener("click", () => scrollEvent(0));
 
 	// 네비게이션 토글
 	const navi = this.querySelector(".navi_btn");
 	navi.addEventListener("click", () => toggle(navi, headerFlg));
-
-	// 스크롤시 활성화
-	this.addEventListener("scroll", () => {
-		const scrTop = window.scrollY;
-		navList.forEach((item) => item.classList.remove("active"));
-		if (scrTop >= sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
-		else if (scrTop >= sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
-		else if (scrTop >= sectionArr[2]) navIdx = 2;
-		navList[navIdx].classList.add("active");
-	});
 
 	// 버튼 클릭시 스크롤
 	const navBtn = this.querySelectorAll(".navi .nav_ul li button");
@@ -131,11 +120,26 @@ document.addEventListener("DOMContentLoaded", function () {
 		})
 	);
 
-	// 스와이퍼
+	// 스크롤시 활성화
+	this.addEventListener("scroll", () => {
+		const scrTop = window.scrollY;
+		navList.forEach((item) => item.classList.remove("active"));
+		if (scrTop >= sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
+		else if (scrTop >= sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
+		else if (scrTop >= sectionArr[2]) navIdx = 2;
+		navList[navIdx].classList.add("active");
 
-	const siteSwiper = new Swiper(".swiper_site_list", {
-		speed: 400,
-		slidesPerView: 1,
-		loop: true,
+		if (scrTop > sectionArr[1]) topBtn.classList.add("active");
+		else topBtn.classList.remove("active");
 	});
+
+	const swiperContainer = this.querySelector(".site_wrap");
+	if (swiperContainer) {
+		// 스와이퍼
+		const siteSwiper = new Swiper(".site_wrap", {
+			speed: 400,
+			slidesPerView: 1,
+			loop: true,
+		});
+	}
 });

@@ -104,7 +104,6 @@ ol {
   display: block;
   border: 0;
   opacity: 0;
-  visibility: hidden;
   font-size: 18px;
   font-weight: 100;
   text-transform: capitalize;
@@ -129,11 +128,43 @@ ol {
 }
 .header .navi .nav_ul li.active button {
   opacity: 1;
-  visibility: visible;
   color: #ffd974;
 }
 .header .navi .nav_ul li.active::before {
   box-shadow: 0 0 5px 1px #ffd974, 0 0 15px 5px #ffd974;
+}
+.header .navi .top {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.5s linear;
+  font-weight: 200;
+}
+.header .navi .top::before, .header .navi .top::after {
+  position: absolute;
+  top: 50%;
+  content: "";
+}
+.header .navi .top::before {
+  right: -15px;
+  width: 10px;
+  height: 10px;
+  transform: translateY(-75%) rotate(45deg);
+  border: 1px solid #ffd974;
+  border-right: 0;
+  border-bottom: 0;
+}
+.header .navi .top::after {
+  right: -10px;
+  width: 1px;
+  height: 20px;
+  transform: translate(20%, -45%);
+  border-right: 1px solid #ffd974;
+}
+.header .navi .top.active {
+  opacity: 1;
 }
 .header .navi.active::before {
   height: 100vh;
@@ -424,7 +455,7 @@ ol {
     font-size: 1rem;
   }
 }
-@media (min-width: 500px) and (max-width: 1080px) {
+@media (min-width: 650px) and (max-width: 1080px) {
   .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(2) {
     padding: 0 12rem;
   }
