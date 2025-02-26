@@ -140,6 +140,14 @@ document.addEventListener("DOMContentLoaded", function () {
 			speed: 400,
 			slidesPerView: 1,
 			loop: true,
+			navigation: {
+				nextEl: ".swiper_btn .next_btn",
+				prevEl: ".swiper_btn .prev_btn",
+			},
+			pagination: {
+				el: ".swiper_btn .page",
+				type: "fraction",
+			},
 		});
 	}
 });

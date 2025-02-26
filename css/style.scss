@@ -302,6 +302,8 @@ ol {
 }
 
 .site_list {
+	position: relative;
+
 	.swiper_site_list {
 		width: 100%;
 		height: 100vh;
@@ -383,6 +385,67 @@ ol {
 						margin-bottom: 10px;
 					}
 				}
+			}
+		}
+	}
+
+	.swiper_btn {
+		position: absolute;
+		left: 50%;
+		bottom: 70px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		column-gap: 20px;
+		width: 100%;
+		height: fit-content;
+		transform: translateX(-50%);
+		z-index: 5;
+
+		li {
+			position: relative;
+			top: initial;
+			left: initial;
+			right: initial;
+			bottom: initial;
+			width: fit-content;
+			height: fit-content;
+			margin: 0;
+		}
+
+		.page {
+			font-size: 20px;
+			font-family: "Noto Sans KR", sans-serif;
+			font-weight: 100;
+			color: #fff;
+		}
+
+		.prev_btn,
+		.next_btn {
+			button {
+				display: block;
+				width: 20px;
+				height: 20px;
+				border: 3px solid #fff;
+				border-color: #fff #fff transparent transparent;
+				background: transparent;
+				cursor: pointer;
+			}
+
+			&:after {
+				display: none;
+			}
+		}
+
+		.prev_btn {
+			button {
+				transform: rotate(-135deg);
+			}
+		}
+
+		.next_btn {
+			button {
+				transform: rotate(45deg);
 			}
 		}
 	}
