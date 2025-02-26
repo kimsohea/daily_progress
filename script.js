@@ -1,3 +1,5 @@
+import Swiper from "swiper";
+
 // date var
 const today = new Date();
 const todayDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
@@ -128,4 +130,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			toggle(navi, true);
 		})
 	);
+
+	// 스와이퍼
+
+	const siteSwiper = new Swiper(".swiper_site_list", {
+		speed: 400,
+		slidesPerView: 1,
+		loop: true,
+	});
 });
