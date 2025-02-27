@@ -145,26 +145,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (scrTop < sectionTopArr[2]) {
       let perVal = ((scrTop - aboutHeight) / aboutHeight) * 100;
-      lineWidth = perVal > 101 ? 100 : perVal;
+      lineWidth = perVal > 85.5 ? 85.5 : perVal;
       introLine.forEach((lines) => (lines.style.width = lineWidth + "%"));
     }
   });
-
-  const swiperContainer = this.querySelector(".site_wrap");
-  if (swiperContainer) {
-    // 스와이퍼
-    const siteSwiper = new Swiper(".site_wrap", {
-      speed: 400,
-      slidesPerView: 1,
-      loop: true,
-      navigation: {
-        nextEl: ".swiper_btn .next_btn",
-        prevEl: ".swiper_btn .prev_btn",
-      },
-      pagination: {
-        el: ".swiper_btn .page",
-        type: "fraction",
-      },
-    });
-  }
 });
