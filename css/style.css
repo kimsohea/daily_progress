@@ -33,6 +33,10 @@ ol {
   list-style: none;
 }
 
+a {
+  text-decoration: none;
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -70,7 +74,7 @@ ol {
   left: 0;
   width: 100%;
   height: 0;
-  transition: height 1s linear, opacity 1s linear;
+  transition: height 0.1s linear, opacity 1s ease-in;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0) 100%);
   opacity: 0;
   z-index: -1;
@@ -111,6 +115,7 @@ ol {
   text-transform: capitalize;
   color: #000;
   transition: color 0.5s linear, opacity 0.5s linear;
+  user-select: none;
 }
 .header .navi .nav_ul li::before {
   position: absolute;
@@ -120,12 +125,15 @@ ol {
   height: 3px;
   border-radius: 50%;
   background-color: #ffd974;
-  transform: translateY(50%);
+  transform: translateY(400%);
   transition: box-shadow 0.5s linear;
   content: "";
 }
 .header .navi .nav_ul li:not(:last-child) {
   padding-bottom: 20px;
+}
+.header .navi .nav_ul li:not(:last-child)::before {
+  transform: translateY(50%);
 }
 .header .navi .nav_ul li.active button {
   opacity: 1;
@@ -428,6 +436,7 @@ ol {
   border-color: #fff #fff transparent transparent;
   background: transparent;
   cursor: pointer;
+  user-select: none;
 }
 .site_list .swiper_btn .prev_btn:after,
 .site_list .swiper_btn .next_btn:after {
@@ -438,6 +447,88 @@ ol {
 }
 .site_list .swiper_btn .next_btn button {
   transform: rotate(45deg);
+}
+
+.my_project {
+  padding: 80px 50px;
+  box-sizing: border-box;
+  color: #fff;
+}
+.my_project h3 {
+  font-size: 25px;
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+.my_project article {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  column-gap: 20px;
+  padding: 40px 0;
+  word-break: keep-all;
+}
+.my_project article figure {
+  width: 600px;
+}
+.my_project article figure img {
+  display: block;
+  width: 100%;
+  border-radius: 20px;
+}
+.my_project article h4 {
+  width: 280px;
+  font-size: 22px;
+}
+.my_project article h4::selection {
+  background-color: #fff;
+  color: #000;
+}
+.my_project article p {
+  width: 620px;
+  font-size: 16px;
+  font-weight: 300;
+}
+.my_project article p a {
+  display: block;
+  width: fit-content;
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #fff;
+  color: inherit;
+}
+.my_project article p::selection {
+  background-color: #fff;
+  color: #000;
+}
+.my_project article::before, .my_project article::after {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 90%;
+  height: 1px;
+  background-color: #fff;
+  transform: translateX(-50%);
+  content: "";
+}
+.my_project article::after {
+  top: initial;
+  bottom: 10px;
+}
+
+.footer {
+  padding: 20px 0 30px;
+  color: #fff;
+}
+.footer ul {
+  display: flex;
+  justify-content: space-evenly;
+  font-size: 16px;
+}
+.footer ul li a {
+  color: inherit;
 }
 
 @media (min-width: 1900px) and (min-height: 800px) {

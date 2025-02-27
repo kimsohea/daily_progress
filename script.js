@@ -134,13 +134,10 @@ document.addEventListener("DOMContentLoaded", function () {
   this.addEventListener("scroll", () => {
     const scrTop = window.scrollY;
     navList.forEach((item) => item.classList.remove("active"));
-    if (scrTop >= sectionArr[0] && scrTop < sectionArr[1]) {
-      navIdx = 0;
-      lineWidth = 0;
-      introLine.forEach((lines) => (lines.style.width = lineWidth + "%"));
-    } else if (scrTop >= sectionArr[1] && scrTop < sectionArr[2]) {
-      navIdx = 1;
-    } else if (scrTop >= sectionArr[2]) navIdx = 2;
+    if (scrTop >= sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
+    else if (scrTop >= sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
+    else if (scrTop >= sectionArr[2] && scrTop < sectionArr[3]) navIdx = 2;
+    else if (scrTop >= sectionArr[3]) navIdx = 3;
     navList[navIdx].classList.add("active");
 
     if (scrTop > sectionArr[1]) topBtn.classList.add("active");
