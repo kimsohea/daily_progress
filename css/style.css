@@ -1,3 +1,4 @@
+@charset "UTF-8";
 main,
 body,
 h1,
@@ -70,7 +71,7 @@ ol {
   width: 100%;
   height: 0;
   transition: height 1s linear, opacity 1s linear;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.8) 30%, rgba(0, 0, 0, 0) 100%);
   opacity: 0;
   z-index: -1;
   pointer-events: none;
@@ -185,6 +186,9 @@ ol {
 .main section {
   height: 100vh;
 }
+.main section.intro_myself {
+  height: 70vh;
+}
 
 .intro {
   position: relative;
@@ -253,6 +257,62 @@ ol {
 .intro > .moon_list > li {
   font-family: "Noto Emoji", sans-serif;
   font-weight: 100;
+}
+
+.intro_myself {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+  box-sizing: border-box;
+  color: #ffd974;
+  text-align: center;
+  font-family: "Noto Sans KR", "Noto Sans TC", sans-serif;
+  word-break: keep-all;
+}
+.intro_myself h3 {
+  position: relative;
+  margin-bottom: 20px;
+  font-size: 30px;
+  font-weight: 200;
+}
+.intro_myself h3::before {
+  font-family: "Noto Emoji", sans-serif;
+  font-weight: 300;
+  display: block;
+  margin-bottom: 25px;
+  font-size: 150px;
+  content: "🌙";
+}
+.intro_myself p {
+  width: 900px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 300;
+}
+.intro_myself p:nth-of-type(1) {
+  margin-bottom: 15px;
+}
+.intro_myself *::selection {
+  background-color: #ffd974;
+  color: #000;
+}
+.intro_myself .deco_line {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  width: 0px;
+  height: 1px;
+  background-color: #ffd974;
+  transition: width 0.5s linear;
+}
+.intro_myself .deco_line:nth-of-type(1) {
+  top: 40px;
+}
+.intro_myself .deco_line:nth-of-type(2) {
+  bottom: 40px;
 }
 
 .site_list {
@@ -380,6 +440,31 @@ ol {
   transform: rotate(45deg);
 }
 
+@media (min-width: 1900px) and (min-height: 800px) {
+  .intro > .slot_box {
+    font-size: 180px;
+    margin-bottom: 150px;
+  }
+  .site_list .swiper_site_list .swiper_slide h2 {
+    font-size: 50px;
+  }
+  .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(1) {
+    font-size: 25px;
+    font-weight: 700;
+  }
+  .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(2) {
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .site_list .swiper_site_list .swiper_slide ul li:nth-of-type(3) {
+    width: 750px;
+    font-size: 16px;
+    line-height: 25px;
+  }
+  .site_list .swiper_site_list .swiper_slide ul li:not(:last-child) {
+    margin-bottom: 20px;
+  }
+}
 @media (max-width: 1080px) {
   body {
     font-size: 3.125vw;
