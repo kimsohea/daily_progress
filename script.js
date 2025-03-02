@@ -13,10 +13,23 @@ const date = todayDate[2] < 10 ? "&solDay=0" + todayDate[2] : "&solDay=" + today
 const requestUrl = dataApiUrl + dataApiKey + year + month + date;
 
 // intro var
+const moonCycle = [
+	{ range: [0, 2], shapeName: "월삭(합삭)", shapeIdx: 0 },
+	{ range: [2, 8], shapeName: "초승달", shapeIdx: 1 },
+	{ range: [8, 9], shapeName: "상현달", shapeIdx: 2 },
+	{ range: [9, 15], shapeName: "상현달", shapeIdx: 3 },
+	{ range: [15, 16], shapeName: "보름달", shapeIdx: 4 },
+	{ range: [16, 22], shapeName: "하현달", shapeIdx: 5 },
+	{ range: [22, 24], shapeName: "하현달", shapeIdx: 6 },
+	{ range: [24, Infinity], shapeName: "그믐달", shapeIdx: 7 },
+];
 const slotList = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
-const moonNameArr = ["월삭(합삭)", "초승달", "상현달", "보름달", "하현달", "그믐달"];
 let slotNum = 0;
 let slotStop = 0;
+
+const moonFinder = (moon) => {
+	return moonCycle.find(({ range }) => moon >= range[0] && moon < range[1]);
+};
 
 // screen var
 const winWidth = window.innerWidth;
@@ -24,54 +37,52 @@ const winHeight = window.innerHeight;
 
 // nav var
 let headerFlg = false;
+let navIdx = 0;
+const sectionArr = [];
+const sectionTopArr = [];
 
-document.addEventListener("DOMContentLoaded", () => {
+const toggle = (element, flg) => {
+	headerFlg = flg ? false : true;
+	if (headerFlg) element.parentElement.classList.add("active");
+	else element.parentElement.classList.remove("active");
+};
+
+const scrollEvent = (val) => {
+	window.scrollTo({ top: val, behavior: "smooth" });
+};
+
+// intro var
+let barWid = 85.5;
+
+document.addEventListener("DOMContentLoaded", function () {
 	// 21:9 모바일 화면일시 모양 변경
 	const screenWrap = document.querySelector(".wrapper");
 	if (winWidth < 1081 && winHeight > 750) screenWrap.classList.add("narrow");
+	if (winWidth < 1081) barWid = 80;
 
+	// Http 리퀘스트
 	const respon = new XMLHttpRequest();
 	respon.open("GET", requestUrl);
 	respon.send();
 	respon.onload = () => {
 		if (respon.status >= 200 && respon.status < 300) {
+			// Xml 받아서 파싱 후 숫자로 변환
 			let parseXML = new DOMParser();
 			let xmlDoc = parseXML.parseFromString(respon.response, "text/xml");
 			let todayMoonStr = xmlDoc.querySelector("body items item lunDay").textContent;
 			let todayMoon = Number(todayMoonStr);
+
 			// 음력일 및 달 명칭 추가
-			document.querySelector(".intro .lun_info").textContent = todayMoon;
-			const moonName = document.querySelector(".intro .lun_name");
-			if (todayMoon < 2) {
-				todayMoonIdx = 0;
-				moonName.textContent = moonNameArr[0];
-			} else if (todayMoon > 2 && todayMoon < 8) {
-				todayMoonIdx = 1;
-				moonName.textContent = moonNameArr[1];
-			} else if (todayMoon >= 8 && todayMoon < 9) {
-				todayMoonIdx = 2;
-				moonName.textContent = moonNameArr[2];
-			} else if (todayMoon > 9 && todayMoon < 15) {
-				todayMoonIdx = 3;
-				moonName.textContent = moonNameArr[2];
-			} else if (todayMoon === 15) {
-				todayMoonIdx = 4;
-				moonName.textContent = moonNameArr[3];
-			} else if (todayMoon > 15 && todayMoon < 22) {
-				todayMoonIdx = 5;
-				moonName.textContent = moonNameArr[3];
-			} else if (todayMoon >= 22 && todayMoon < 24) {
-				todayMoonIdx = 6;
-				moonName.textContent = moonNameArr[4];
-			} else {
-				todayMoonIdx = 7;
-				moonName.textContent = moonNameArr[5];
-			}
+			this.querySelector(".intro .lun_info").textContent = todayMoon;
+			const moonName = this.querySelector(".intro .lun_name");
+			const moonInfo = moonFinder(todayMoon);
+			todayMoonIdx = moonInfo.shapeIdx;
+			moonName.textContent = moonInfo.shapeName;
 		} else console.log("failed");
 	};
 
 	// 달 슬롯머신
-	const slotBox = document.querySelector(".slot_box");
+	const slotBox = this.querySelector(".slot_box");
 	const slotTimer = setInterval(() => {
 		slotBox.textContent = slotList[slotNum];
 		slotNum++;
@@ -84,33 +95,56 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	}, 50);
 
-	// 네비게이션 토글
-	const navi = document.querySelector(".navi");
-	navi.addEventListener("click", function () {
-		headerFlg = headerFlg ? false : true;
-		if (headerFlg) this.classList.add("active");
-		else this.classList.remove("active");
-	});
-
-	// 스크롤시 네비게이션 활성화
+	// 네비게이션 섹션
 	const heightHalf = winHeight / 2;
-	const sectionArr = [];
-	const navList = document.querySelectorAll(".navi .nav_ul li");
-	let navIdx = 0;
-	document.querySelectorAll(".main>section").forEach((el, idx) => {
-		if (idx === 0) sectionArr.push(el.offsetTop);
-		else sectionArr.push(el.offsetTop - heightHalf);
+	const sectionNode = this.querySelectorAll(".main>section");
+	const navList = this.querySelectorAll(".navi .nav_ul li");
+
+	sectionNode.forEach((el, idx) => {
+		sectionTopArr.push(el.offsetTop);
+		if (idx > 0) sectionArr.push(el.offsetTop - heightHalf);
+		else sectionArr.push(el.offsetTop);
 	});
-	document.addEventListener("scroll", () => {
+
+	// 최상단 버튼 스크롤
+	const topBtn = this.querySelector(".navi .top");
+	topBtn.addEventListener("click", () => scrollEvent(0));
+
+	// 네비게이션 토글
+	const navi = this.querySelector(".navi_btn");
+	navi.addEventListener("click", () => toggle(navi, headerFlg));
+
+	// 버튼 클릭시 스크롤
+	const navBtn = this.querySelectorAll(".navi .nav_ul li button");
+	sectionNode.forEach((el) => sectionTopArr.push(el.offsetTop));
+	navBtn.forEach((item, idx) =>
+		item.addEventListener("click", () => {
+			scrollEvent(sectionTopArr[idx]);
+			toggle(navi, true);
+		})
+	);
+
+	// 스크롤시 활성화
+	const introLine = this.querySelectorAll(".intro_myself .deco_line");
+	let lineWidth = 0;
+	const aboutHeight = sectionTopArr[2] - sectionTopArr[1];
+
+	this.addEventListener("scroll", () => {
 		const scrTop = window.scrollY;
-
 		navList.forEach((item) => item.classList.remove("active"));
-		if (scrTop > sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
-		else if (scrTop > sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
-		else if (scrTop > sectionArr[2]) navIdx = 2;
+		if (scrTop >= sectionArr[0] && scrTop < sectionArr[1]) navIdx = 0;
+		else if (scrTop >= sectionArr[1] && scrTop < sectionArr[2]) navIdx = 1;
+		else if (scrTop >= sectionArr[2] && scrTop < sectionArr[3]) navIdx = 2;
+		else if (scrTop >= sectionArr[3]) navIdx = 3;
 		navList[navIdx].classList.add("active");
-	});
 
-	// 네비게이션 버튼 클릭시 이동
-	navList.forEach((item, idx) => item.addEventListener("click", (btn) => console.log(btn, idx)));
+		if (scrTop > sectionArr[1]) topBtn.classList.add("active");
+		else topBtn.classList.remove("active");
+
+		if (scrTop < sectionTopArr[2]) {
+			let perVal = ((scrTop - aboutHeight) / aboutHeight) * 100;
+			lineWidth = perVal > barWid ? barWid : perVal;
+			introLine.forEach((lines) => (lines.style.width = lineWidth + "%"));
+		}
+	});
 });
