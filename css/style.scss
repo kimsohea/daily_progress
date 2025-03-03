@@ -874,16 +874,20 @@ a {
             width: 18rem;
           }
 
+          a {
+            width: 6rem;
+            height: 4rem;
+            padding: 0 0.5rem;
+            font-size: 0.8rem;
+          }
+
           > p {
             width: 80%;
             padding: 0 0.75rem;
             text-align: center;
 
             > a {
-              width: 6rem;
-              height: 4rem;
               margin: 2rem auto 0;
-              font-size: 0.8rem;
             }
           }
 
@@ -925,9 +929,7 @@ a {
                 margin-top: 2rem;
 
                 a {
-                  width: 6rem;
-                  height: 4rem;
-                  font-size: 0.8rem;
+                  margin: 0;
                 }
               }
 

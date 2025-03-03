@@ -675,16 +675,19 @@ a {
   .site_list .site_list_wrap .site_ul > li figure {
     width: 18rem;
   }
+  .site_list .site_list_wrap .site_ul > li a {
+    width: 6rem;
+    height: 4rem;
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+  }
   .site_list .site_list_wrap .site_ul > li > p {
     width: 80%;
     padding: 0 0.75rem;
     text-align: center;
   }
   .site_list .site_list_wrap .site_ul > li > p > a {
-    width: 6rem;
-    height: 4rem;
     margin: 2rem auto 0;
-    font-size: 0.8rem;
   }
   .site_list .site_list_wrap .site_ul > li h3 {
     font-size: 2rem;
@@ -718,9 +721,7 @@ a {
     margin-top: 2rem;
   }
   .site_list .site_list_wrap .site_ul > li ul li:nth-of-type(4) a {
-    width: 6rem;
-    height: 4rem;
-    font-size: 0.8rem;
+    margin: 0;
   }
   .site_list .site_list_wrap .site_ul > li ul li:not(:last-child) {
     margin-bottom: 1rem;
