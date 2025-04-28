@@ -3,17 +3,12 @@ const today = new Date();
 const todayDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
 
 let todayMoonIdx = 0;
-const dataApiUrl =
-  "https://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo";
+const dataApiUrl = "https://apis.data.go.kr/B090041/openapi/service/LrsrCldInfoService/getLunCalInfo";
 const dataApiKey =
   "?ServiceKey=68%2BtOC0gNDUQjLJUHWznKNCwXD8Wy04hWoQH%2Bl%2FI9Rhne17jw9Rljp1xNppnXbFUrXTsNKJpZWeIA9lv2RJVxQ%3D%3D";
 const year = "&solYear=" + today.getFullYear();
-const month =
-  todayDate[1] < 10
-    ? "&solMonth=0" + todayDate[1]
-    : "&solMonth=" + todayDate[1];
-const date =
-  todayDate[2] < 10 ? "&solDay=0" + todayDate[2] : "&solDay=" + todayDate[2];
+const month = todayDate[1] < 10 ? "&solMonth=0" + todayDate[1] : "&solMonth=" + todayDate[1];
+const date = todayDate[2] < 10 ? "&solDay=0" + todayDate[2] : "&solDay=" + todayDate[2];
 const requestUrl = dataApiUrl + dataApiKey + year + month + date;
 
 // intro var
@@ -27,9 +22,6 @@ const moonCycle = [
   { range: [22, 24], shapeName: "하현달", shapeIdx: 6 },
   { range: [24, Infinity], shapeName: "그믐달", shapeIdx: 7 },
 ];
-const slotList = ["🌑", "🌒", "🌓", "🌔", "🌕", "🌖", "🌗", "🌘"];
-let slotNum = 0;
-let slotStop = 0;
 
 const moonFinder = (moon) => {
   return moonCycle.find(({ range }) => moon >= range[0] && moon < range[1]);
@@ -55,6 +47,10 @@ const scrollEvent = (val) => {
   window.scrollTo({ top: val, behavior: "smooth" });
 };
 
+const getScrollbarWidth = () => {
+  return window.innerWidth - document.documentElement.clientWidth;
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   // 21:9 모바일 화면일시 모양 변경
   const screenWrap = document.querySelector(".wrapper");
@@ -69,9 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // Xml 받아서 파싱 후 숫자로 변환
       let parseXML = new DOMParser();
       let xmlDoc = parseXML.parseFromString(respon.response, "text/xml");
-      let todayMoonStr = xmlDoc.querySelector(
-        "body items item lunDay"
-      ).textContent;
+      let todayMoonStr = xmlDoc.querySelector("body items item lunDay").textContent;
       let todayMoon = Number(todayMoonStr);
 
       // 음력일 및 달 명칭 추가
@@ -80,22 +74,72 @@ document.addEventListener("DOMContentLoaded", function () {
       const moonInfo = moonFinder(todayMoon);
       todayMoonIdx = moonInfo.shapeIdx;
       moonName.textContent = moonInfo.shapeName;
+      this.querySelector(".moon_box").classList.add(`type0${todayMoonIdx}`);
+      this.querySelectorAll(".moon_list li")[0].classList.remove(`active`);
+      this.querySelectorAll(".moon_list li")[todayMoonIdx].classList.add(`active`);
     } else console.log("failed");
   };
 
+  const moonLists = this.querySelectorAll(".moon_list li");
+
+  moonLists.forEach((item) => {
+    item.addEventListener("click", function () {
+      moonLists.forEach((lists) => lists.classList.remove("active"));
+      this.classList.add("active");
+    });
+  });
+
   // 달 슬롯머신
-  const slotBox = this.querySelector(".slot_box");
-  const slotTimer = setInterval(() => {
-    slotBox.textContent = slotList[slotNum];
-    slotNum++;
-    slotStop++;
-    if (slotNum > 7) slotNum = 0;
-    if (slotStop > 28) {
-      clearInterval(slotTimer);
-      slotBox.textContent = slotList[todayMoonIdx];
-      slotBox.classList.add("shine");
+  let canvas = document.getElementById("grass"),
+    ctx = canvas.getContext("2d"),
+    stack = [],
+    w = window.innerWidth - getScrollbarWidth(),
+    h = window.innerHeight;
+  const drawer = function () {
+    ctx.fillRect(0, 0, w, h);
+    stack.forEach((el) => el());
+    requestAnimationFrame(drawer);
+  };
+  const anim = function () {
+    let x = (y = 0);
+    let maxTall = Math.random() * 100 + 200;
+    let maxSize = Math.random() * 10;
+    let speed = Math.random();
+    let position = Math.random() * w - w / 2;
+    let c = (l, u) => Math.round(Math.random() * (u || 255) + l || 0);
+    let color = "rgb(" + c(250, 5) + "," + c(215, 10) + "," + c(110, 10) + ")";
+    return function () {
+      const deviation = Math.cos(x / 30) * Math.min(x / 40, 50),
+        tall = Math.min(x / 2, maxTall),
+        size = Math.min(x / 50, maxSize);
+      x += speed;
+      ctx.save();
+      ctx.strokeWidth = 10;
+      ctx.translate(w / 2 + position, h);
+      ctx.fillStyle = color;
+      ctx.beginPath();
+      ctx.lineTo(-size, 0);
+      ctx.quadraticCurveTo(-size, -tall / 2, deviation, -tall);
+      ctx.quadraticCurveTo(size, -tall / 2, size, 0);
+      ctx.fill();
+      ctx.restore();
+    };
+  };
+  for (let x = 0; x < 400; x++) {
+    stack.push(anim());
+  }
+  canvas.width = w;
+  canvas.height = h;
+  window.addEventListener("resize", () => {
+    (w = window.innerWidth - getScrollbarWidth()), (h = window.innerHeight);
+    canvas.width = w;
+    canvas.height = h;
+    stack = [];
+    for (let x = 0; x < 400; x++) {
+      stack.push(anim());
     }
-  }, 50);
+  });
+  drawer();
 
   // 네비게이션 섹션
   const heightHalf = winHeight / 2;
