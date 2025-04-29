@@ -1,51 +1,8 @@
 @charset "UTF-8";
-main,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-span,
-section,
-div,
-header,
-footer,
-article,
-figure,
-button {
-  margin: 0;
-  padding: 0;
-  font-family: "Noto Sans KR", "Noto Sans TC", sans-serif;
+@font-face {
+  font-family: "Noto Emoji";
+  src: url("../fonts/NotoEmoji-Light.ttf") format("truetype");
 }
-
-section {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #000;
-}
-
-ul,
-ol {
-  list-style: none;
-  box-sizing: border-box;
-}
-ul li,
-ol li {
-  box-sizing: border-box;
-}
-
-a {
-  text-decoration: none;
-}
-
 .header {
   position: fixed;
   top: 0;
@@ -442,13 +399,21 @@ a {
   -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .intro_myself {
   position: relative;
-  height: 70vh;
-  min-height: 800px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
   padding: 0 50px;
   color: #ffd974;
@@ -486,14 +451,136 @@ a {
   background-color: #ffd974;
   color: #000;
 }
-.intro_myself .deco_line {
-  display: block;
-  pointer-events: none;
-  width: 0px;
-  height: 1px;
-  margin: 0 auto;
+.intro_myself .ani_icon {
+  position: relative;
+  width: 200px;
+  height: 100px;
+  border-bottom: 2px solid #ffd974;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.intro_myself .ani_icon .sun {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  animation: rotate 4s linear infinite normal;
+}
+.intro_myself .ani_icon .sun::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: 15px;
+  border-radius: 50%;
   background-color: #ffd974;
-  transition: width 0.5s linear;
+  outline: 5px dotted #ffd974;
+  outline-offset: 5px;
+  animation: rotate 4s linear infinite reverse;
+}
+.intro_myself .ani_icon .sun:after {
+  content: "";
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border-style: solid;
+  border-width: 0;
+  border-color: #ffd974;
+  background-color: #ffd974;
+  animation: rotate 4s linear infinite reverse;
+}
+.intro_myself .ani_icon .sun.type00:after {
+  outline: 2px solid #ffd974;
+  background-color: transparent;
+}
+.intro_myself .ani_icon .sun.type01:after {
+  border-right-width: 5px;
+  background-color: transparent;
+}
+.intro_myself .ani_icon .sun.type02:after {
+  border-right-width: 12px;
+  background-color: transparent;
+}
+.intro_myself .ani_icon .sun.type03:after {
+  border-left: 7px solid #000;
+}
+.intro_myself .ani_icon .sun.type05:after {
+  border-right: 7px solid #000;
+}
+.intro_myself .ani_icon .sun.type06:after {
+  border-left: 12px solid #ffd974;
+  background-color: #000;
+}
+.intro_myself .ani_icon .sun.type07:after {
+  border-left: 5px solid #ffd974;
+  background-color: #000;
+}
+.intro_myself .char {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+.intro_myself .char li {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  row-gap: 10px;
+  width: 150px;
+  height: 160px;
+}
+.intro_myself .char li svg path {
+  stroke: #ffd974;
+  stroke-width: 3;
+  stroke-dashoffset: 220px;
+  stroke-dasharray: 220px;
+  fill: transparent;
+  transition: stroke-dashoffset 1s linear;
+}
+.intro_myself .char li p {
+  width: 100%;
+  margin-bottom: 0;
+}
+.intro_myself.active .char svg path {
+  stroke-dashoffset: 0px;
+}
+.intro_myself.active .char svg path:nth-child(2) {
+  transition-delay: 100ms;
+}
+.intro_myself.active .char svg path:nth-child(3) {
+  transition-delay: 150ms;
+}
+.intro_myself.active .char svg path:nth-child(4) {
+  transition-delay: 200ms;
+}
+.intro_myself.active .char svg path:nth-child(5) {
+  transition-delay: 250ms;
+}
+.intro_myself.active .char svg path:nth-child(6) {
+  transition-delay: 300ms;
+}
+.intro_myself.active .char svg path:nth-child(7) {
+  transition-delay: 350ms;
+}
+.intro_myself.active .char svg path:nth-child(8) {
+  transition-delay: 400ms;
+}
+.intro_myself.active .char svg path:nth-child(9) {
+  transition-delay: 450ms;
+}
+.intro_myself.active .char svg path:nth-child(10) {
+  transition-delay: 500ms;
+}
+.intro_myself.active .char svg path:nth-child(11) {
+  transition-delay: 550ms;
+}
+.intro_myself.active .char svg path:nth-child(12) {
+  transition-delay: 600ms;
 }
 
 .site_list {
@@ -689,9 +776,10 @@ a {
 }
 @media (max-width: 1400px) and (max-height: 1200px) {
   .intro .moon_list {
+    top: 100px;
     -moz-column-gap: 0;
          column-gap: 0;
-    row-gap: 130px;
+    row-gap: 100px;
   }
   .intro .moon_list li {
     width: 25%;
@@ -717,6 +805,19 @@ a {
   .intro > .slot_box {
     font-size: 250px;
     margin-bottom: 150px;
+  }
+  .intro_myself p {
+    width: 600px;
+  }
+  .intro_myself .ani_icon {
+    width: 250px;
+    height: 150px;
+  }
+  .intro_myself .char {
+    flex-wrap: wrap;
+  }
+  .intro_myself .char li {
+    width: 50%;
   }
 }
 @media (max-width: 1400px) and (max-height: 1400px) {
@@ -768,6 +869,37 @@ a {
   .intro > .slot_box {
     font-size: 180px;
     margin-bottom: 80px;
+  }
+  .intro .moon_list {
+    top: 80px;
+    -moz-column-gap: 0px;
+         column-gap: 0px;
+    row-gap: 80px;
+  }
+  .intro .moon_list figure {
+    margin-bottom: 5px;
+  }
+  .intro .moon_list p {
+    font-size: 12px;
+  }
+}
+@media (max-width: 850px) and (max-height: 1200px) {
+  .intro .moon_list {
+    top: 120px;
+    row-gap: 130px;
+  }
+}
+@media (max-width: 1400px) and (min-height: 1020px) {
+  .intro {
+    padding: 50px 120px 200px;
+  }
+}
+@media (max-width: 1200px) and (max-height: 800px) {
+  .intro .moon_list {
+    row-gap: 40px;
+  }
+  .intro .moon_list p {
+    display: none;
   }
 }
 @media (max-width: 800px) and (max-height: 900px) {
@@ -873,8 +1005,25 @@ a {
     font-size: 9rem;
     margin-bottom: 5rem;
   }
-  .intro .moon_list {
+  .intro .moon_list li {
     display: none;
+    width: 80%;
+  }
+  .intro .moon_list li strong,
+  .intro .moon_list li span {
+    font-size: 1rem;
+  }
+  .intro .moon_list li p {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 300;
+  }
+  .intro .moon_list li figure {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+  }
+  .intro .moon_list li.active {
+    display: block;
   }
   .intro .deco_txt {
     position: absolute;
@@ -887,7 +1036,6 @@ a {
     margin-left: 0.2rem;
   }
   .intro_myself {
-    height: auto;
     padding: 0 1.5rem;
   }
   .intro_myself h3 {
@@ -902,6 +1050,26 @@ a {
     width: 90%;
     font-size: 0.85rem;
     margin-bottom: 1.5rem;
+  }
+  .intro_myself .ani_icon {
+    width: 12rem;
+    height: 6rem;
+  }
+  .intro_myself .char {
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .intro_myself .char li {
+    width: 40%;
+    height: 6rem;
+  }
+  .intro_myself .char li svg {
+    width: 3.5rem;
+  }
+  .intro_myself .char li:nth-child(2) svg, .intro_myself .char li:nth-child(4) svg {
+    width: 4rem;
   }
   .site_list {
     padding: 4rem 1.5rem;

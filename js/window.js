@@ -2,9 +2,6 @@
 export const winWidth = window.innerWidth;
 export const winHeight = window.innerHeight;
 
-export const sectionArr = [];
-export const sectionTopArr = [];
-
 // intro var
 export const moonCycle = [
   { range: [0, 2], shapeName: "월삭(합삭)", shapeIdx: 0 },

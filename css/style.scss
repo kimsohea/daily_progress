@@ -1,57 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: "Noto Emoji";
+  src: url("../fonts/NotoEmoji-Light.ttf") format("truetype");
+}
+
 $baseFont: "Noto Sans KR", "Noto Sans TC", sans-serif;
 $emojFont: "Noto Emoji", sans-serif;
 
 $baseColr: #ffd974;
 $pointColr: #ffecb8;
-
-main,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-span,
-section,
-div,
-header,
-footer,
-article,
-figure,
-button {
-  margin: 0;
-  padding: 0;
-  font-family: $baseFont;
-}
-
-section {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #000;
-}
-
-ul,
-ol {
-  list-style: none;
-  box-sizing: border-box;
-
-  li {
-    box-sizing: border-box;
-  }
-}
-
-a {
-  text-decoration: none;
-}
 
 .header {
   position: fixed;
@@ -530,13 +488,22 @@ a {
   }
 }
 
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .intro_myself {
   position: relative;
-  height: 70vh;
-  min-height: 800px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
   padding: 0 50px;
   color: $baseColr;
@@ -575,14 +542,146 @@ a {
     color: #000;
   }
 
-  .deco_line {
-    display: block;
-    pointer-events: none;
-    width: 0px;
-    height: 1px;
-    margin: 0 auto;
-    background-color: $baseColr;
-    transition: width 0.5s linear;
+  .ani_icon {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    border-bottom: 2px solid $baseColr;
+    margin-bottom: 30px;
+    overflow: hidden;
+
+    .sun {
+      position: absolute;
+      width: 100%;
+      height: 200%;
+      animation: rotate 4s linear infinite normal;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 50%;
+        width: 30px;
+        height: 30px;
+        margin-left: 15px;
+        border-radius: 50%;
+        background-color: #ffd974;
+        outline: 5px dotted #ffd974;
+        outline-offset: 5px;
+        animation: rotate 4s linear infinite reverse;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 0;
+        border-color: $baseColr;
+        background-color: $baseColr;
+        animation: rotate 4s linear infinite reverse;
+      }
+
+      &.type00 {
+        &:after {
+          outline: 2px solid $baseColr;
+          background-color: transparent;
+        }
+      }
+
+      &.type01 {
+        &:after {
+          border-right-width: 5px;
+          background-color: transparent;
+        }
+      }
+
+      &.type02 {
+        &:after {
+          border-right-width: 12px;
+          background-color: transparent;
+        }
+      }
+
+      &.type03 {
+        &:after {
+          border-left: 7px solid #000;
+        }
+      }
+
+      &.type05 {
+        &:after {
+          border-right: 7px solid #000;
+        }
+      }
+
+      &.type06 {
+        &:after {
+          border-left: 12px solid $baseColr;
+          background-color: #000;
+        }
+      }
+
+      &.type07 {
+        &:after {
+          border-left: 5px solid $baseColr;
+          background-color: #000;
+        }
+      }
+    }
+  }
+
+  .char {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      row-gap: 10px;
+      width: 150px;
+      height: 160px;
+
+      svg {
+        path {
+          stroke: #ffd974;
+          stroke-width: 3;
+          stroke-dashoffset: 220px;
+          stroke-dasharray: 220px;
+          fill: transparent;
+          transition: stroke-dashoffset 1s linear;
+        }
+      }
+
+      p {
+        width: 100%;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &.active {
+    .char {
+      svg {
+        path {
+          stroke-dashoffset: 0px;
+
+          @for $i from 2 through 12 {
+            &:nth-child(#{$i}) {
+              transition-delay: 500ms * ($i * 0.1);
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -839,8 +938,9 @@ a {
 @media (max-width: 1400px) and (max-height: 1200px) {
   .intro {
     .moon_list {
+      top: 100px;
       column-gap: 0;
-      row-gap: 130px;
+      row-gap: 100px;
 
       li {
         width: 25%;
@@ -879,6 +979,25 @@ a {
     > .slot_box {
       font-size: 250px;
       margin-bottom: 150px;
+    }
+  }
+
+  .intro_myself {
+    p {
+      width: 600px;
+    }
+
+    .ani_icon {
+      width: 250px;
+      height: 150px;
+    }
+
+    .char {
+      flex-wrap: wrap;
+
+      li {
+        width: 50%;
+      }
     }
   }
 }
@@ -953,6 +1072,47 @@ a {
     > .slot_box {
       font-size: 180px;
       margin-bottom: 80px;
+    }
+
+    .moon_list {
+      top: 80px;
+      column-gap: 0px;
+      row-gap: 80px;
+
+      figure {
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) and (max-height: 1200px) {
+  .intro {
+    .moon_list {
+      top: 120px;
+      row-gap: 130px;
+    }
+  }
+}
+
+@media (max-width: 1400px) and (min-height: 1020px) {
+  .intro {
+    padding: 50px 120px 200px;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 800px) {
+  .intro {
+    .moon_list {
+      row-gap: 40px;
+
+      p {
+        display: none;
+      }
     }
   }
 }
@@ -1098,7 +1258,30 @@ a {
     }
 
     .moon_list {
-      display: none;
+      li {
+        display: none;
+        width: 80%;
+
+        strong,
+        span {
+          font-size: 1rem;
+        }
+
+        p {
+          display: block;
+          font-size: 0.85rem;
+          font-weight: 300;
+        }
+
+        figure {
+          font-size: 3rem;
+          margin-bottom: 0.5rem;
+        }
+
+        &.active {
+          display: block;
+        }
+      }
     }
 
     .deco_txt {
@@ -1115,7 +1298,6 @@ a {
   }
 
   .intro_myself {
-    height: auto;
     padding: 0 1.5rem;
 
     h3 {
@@ -1132,6 +1314,34 @@ a {
       width: 90%;
       font-size: 0.85rem;
       margin-bottom: 1.5rem;
+    }
+
+    .ani_icon {
+      width: 12rem;
+      height: 6rem;
+    }
+
+    .char {
+      width: 100%;
+      flex-wrap: wrap;
+      row-gap: 1rem;
+      margin-bottom: 1rem;
+
+      li {
+        width: 40%;
+        height: 6rem;
+
+        svg {
+          width: 3.5rem;
+        }
+
+        &:nth-child(2),
+        &:nth-child(4) {
+          svg {
+            width: 4rem;
+          }
+        }
+      }
     }
   }
 

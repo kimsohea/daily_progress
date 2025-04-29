@@ -1,12 +1,4 @@
-import {
-  winWidth,
-  winHeight,
-  sectionArr,
-  sectionTopArr,
-  moonFinder,
-  scrollEvent,
-  getScrollbarWidth,
-} from "./window.js";
+import { winWidth, winHeight, moonFinder, scrollEvent, getScrollbarWidth } from "./window.js";
 
 // date var
 const today = new Date();
@@ -30,6 +22,9 @@ const toggle = (element, flg) => {
   if (headerFlg) element.parentElement.classList.add("active");
   else element.parentElement.classList.remove("active");
 };
+
+let sectionArr = [];
+let sectionTopArr = [];
 
 document.addEventListener("DOMContentLoaded", function () {
   // 21:9 모바일 화면일시 모양 변경
@@ -56,6 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       moonName.textContent = moonInfo.shapeName;
       this.querySelector(".moon_box").classList.remove("type00");
       this.querySelector(".moon_box").classList.add(`type0${todayMoonIdx}`);
+      this.querySelector(".sun").classList.add(`type0${todayMoonIdx}`);
       this.querySelectorAll(".moon_list li")[0].classList.remove(`active`);
       this.querySelectorAll(".moon_list li")[todayMoonIdx].classList.add(`active`);
     } else console.log("failed");
@@ -120,6 +116,14 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let x = 0; x < 400; x++) {
       stack.push(anim());
     }
+
+    sectionArr = [];
+    sectionTopArr = [];
+    sectionNode.forEach((el, idx) => {
+      sectionTopArr.push(el.offsetTop);
+      if (idx > 0) sectionArr.push(el.offsetTop - heightHalf);
+      else sectionArr.push(el.offsetTop);
+    });
   });
 
   // 네비게이션 섹션
@@ -151,10 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
   );
 
-  // 스크롤시 활성화
-  const introLine = this.querySelectorAll(".intro_myself .deco_line");
-  let lineWidth = 0;
-  const aboutHeight = sectionTopArr[2] - sectionTopArr[1];
+  const selfIntro = this.querySelector(".intro_myself");
 
   this.addEventListener("scroll", () => {
     const scrTop = window.scrollY;
@@ -165,13 +166,12 @@ document.addEventListener("DOMContentLoaded", function () {
     else if (scrTop >= sectionArr[3]) navIdx = 3;
     navList[navIdx].classList.add("active");
 
-    if (scrTop > sectionArr[1]) topBtn.classList.add("active");
-    else topBtn.classList.remove("active");
-
-    if (scrTop < sectionTopArr[2]) {
-      let perVal = ((scrTop - aboutHeight) / aboutHeight) * 100;
-      lineWidth = perVal > 90 ? 90 : perVal;
-      introLine.forEach((lines) => (lines.style.width = lineWidth + "%"));
+    if (scrTop > sectionArr[1]) {
+      topBtn.classList.add("active");
+      selfIntro.classList.add("active");
+    } else {
+      topBtn.classList.remove("active");
+      selfIntro.classList.remove("active");
     }
   });
 });
