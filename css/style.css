@@ -344,7 +344,7 @@
   transform: translateY(50px);
 }
 .intro .moon_list li:nth-child(4), .intro .moon_list li:nth-child(5) {
-  transform: translateY(75px);
+  transform: translateY(70px);
 }
 .intro .moon_list strong,
 .intro .moon_list span {
