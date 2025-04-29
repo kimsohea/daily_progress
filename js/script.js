@@ -1,3 +1,13 @@
+import {
+  winWidth,
+  winHeight,
+  sectionArr,
+  sectionTopArr,
+  moonFinder,
+  scrollEvent,
+  getScrollbarWidth,
+} from "./window.js";
+
 // date var
 const today = new Date();
 const todayDate = [today.getFullYear(), today.getMonth() + 1, today.getDate()];
@@ -11,44 +21,14 @@ const month = todayDate[1] < 10 ? "&solMonth=0" + todayDate[1] : "&solMonth=" + 
 const date = todayDate[2] < 10 ? "&solDay=0" + todayDate[2] : "&solDay=" + todayDate[2];
 const requestUrl = dataApiUrl + dataApiKey + year + month + date;
 
-// intro var
-const moonCycle = [
-  { range: [0, 2], shapeName: "월삭(합삭)", shapeIdx: 0 },
-  { range: [2, 8], shapeName: "초승달", shapeIdx: 1 },
-  { range: [8, 9], shapeName: "상현달", shapeIdx: 2 },
-  { range: [9, 15], shapeName: "상현달", shapeIdx: 3 },
-  { range: [15, 16], shapeName: "보름달", shapeIdx: 4 },
-  { range: [16, 22], shapeName: "하현달", shapeIdx: 5 },
-  { range: [22, 24], shapeName: "하현달", shapeIdx: 6 },
-  { range: [24, Infinity], shapeName: "그믐달", shapeIdx: 7 },
-];
-
-const moonFinder = (moon) => {
-  return moonCycle.find(({ range }) => moon >= range[0] && moon < range[1]);
-};
-
-// screen var
-const winWidth = window.innerWidth;
-const winHeight = window.innerHeight;
-
 // nav var
 let headerFlg = false;
 let navIdx = 0;
-const sectionArr = [];
-const sectionTopArr = [];
 
 const toggle = (element, flg) => {
   headerFlg = flg ? false : true;
   if (headerFlg) element.parentElement.classList.add("active");
   else element.parentElement.classList.remove("active");
-};
-
-const scrollEvent = (val) => {
-  window.scrollTo({ top: val, behavior: "smooth" });
-};
-
-const getScrollbarWidth = () => {
-  return window.innerWidth - document.documentElement.clientWidth;
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -74,6 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
       const moonInfo = moonFinder(todayMoon);
       todayMoonIdx = moonInfo.shapeIdx;
       moonName.textContent = moonInfo.shapeName;
+      this.querySelector(".moon_box").classList.remove("type00");
       this.querySelector(".moon_box").classList.add(`type0${todayMoonIdx}`);
       this.querySelectorAll(".moon_list li")[0].classList.remove(`active`);
       this.querySelectorAll(".moon_list li")[todayMoonIdx].classList.add(`active`);
@@ -81,7 +62,6 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   const moonLists = this.querySelectorAll(".moon_list li");
-
   moonLists.forEach((item) => {
     item.addEventListener("click", function () {
       moonLists.forEach((lists) => lists.classList.remove("active"));
@@ -89,19 +69,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // 달 슬롯머신
+  // 하단 잔디 필드
   let canvas = document.getElementById("grass"),
     ctx = canvas.getContext("2d"),
     stack = [],
-    w = window.innerWidth - getScrollbarWidth(),
-    h = window.innerHeight;
+    w = winWidth - getScrollbarWidth();
   const drawer = function () {
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(0, 0, w, winHeight);
     stack.forEach((el) => el());
     requestAnimationFrame(drawer);
   };
   const anim = function () {
-    let x = (y = 0);
+    let x = 0;
     let maxTall = Math.random() * 100 + 200;
     let maxSize = Math.random() * 10;
     let speed = Math.random();
@@ -115,7 +94,7 @@ document.addEventListener("DOMContentLoaded", function () {
       x += speed;
       ctx.save();
       ctx.strokeWidth = 10;
-      ctx.translate(w / 2 + position, h);
+      ctx.translate(w / 2 + position, winHeight);
       ctx.fillStyle = color;
       ctx.beginPath();
       ctx.lineTo(-size, 0);
@@ -125,21 +104,23 @@ document.addEventListener("DOMContentLoaded", function () {
       ctx.restore();
     };
   };
+
   for (let x = 0; x < 400; x++) {
     stack.push(anim());
   }
   canvas.width = w;
-  canvas.height = h;
+  canvas.height = winHeight;
+  drawer();
+
   window.addEventListener("resize", () => {
-    (w = window.innerWidth - getScrollbarWidth()), (h = window.innerHeight);
+    w = window.innerWidth - getScrollbarWidth();
     canvas.width = w;
-    canvas.height = h;
+    canvas.height = winHeight;
     stack = [];
     for (let x = 0; x < 400; x++) {
       stack.push(anim());
     }
   });
-  drawer();
 
   // 네비게이션 섹션
   const heightHalf = winHeight / 2;
