@@ -1,57 +1,15 @@
 @charset "UTF-8";
 
+@font-face {
+  font-family: "Noto Emoji";
+  src: url("../fonts/NotoEmoji-Light.ttf") format("truetype");
+}
+
 $baseFont: "Noto Sans KR", "Noto Sans TC", sans-serif;
 $emojFont: "Noto Emoji", sans-serif;
 
 $baseColr: #ffd974;
 $pointColr: #ffecb8;
-
-main,
-body,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ul,
-ol,
-li,
-span,
-section,
-div,
-header,
-footer,
-article,
-figure,
-button {
-  margin: 0;
-  padding: 0;
-  font-family: $baseFont;
-}
-
-section {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: #000;
-}
-
-ul,
-ol {
-  list-style: none;
-  box-sizing: border-box;
-
-  li {
-    box-sizing: border-box;
-  }
-}
-
-a {
-  text-decoration: none;
-}
 
 .header {
   position: fixed;
@@ -94,11 +52,7 @@ a {
       width: 100%;
       height: 0;
       transition: height 0.1s linear, opacity 1s ease-in;
-      background: linear-gradient(
-        180deg,
-        rgb(0 0 0 / 80%) 30%,
-        rgba(0, 0, 0, 0) 100%
-      );
+      background: linear-gradient(180deg, rgb(0 0 0 / 80%) 30%, rgba(0, 0, 0, 0) 100%);
       opacity: 0;
       z-index: -1;
       pointer-events: none;
@@ -239,17 +193,160 @@ a {
       }
     }
   }
+
+  .moon_box {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    overflow: hidden;
+    left: 150px;
+    top: 26px;
+
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      border-radius: 100%;
+      background-color: #000;
+      content: "";
+    }
+
+    &::after {
+      background-color: #ffd974;
+    }
+
+    &.type00 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffd974;
+      }
+
+      &::after {
+        left: 1%;
+        width: 98.5%;
+        height: 98.5%;
+        background-color: #000;
+      }
+    }
+
+    &.type01 {
+      &::after {
+        left: -10%;
+        width: 88%;
+        height: 88%;
+        background-color: #000;
+      }
+
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $baseColr;
+      }
+    }
+
+    &.type02 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $baseColr;
+      }
+      &::after {
+        left: -9%;
+        width: 70%;
+        height: 130%;
+        border-radius: 0 50% 50% 0;
+        background-color: #000;
+      }
+    }
+
+    &.type03 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &::after {
+        right: -5%;
+        width: 90%;
+        height: 105%;
+        border-radius: 50% 0 0 50%;
+      }
+    }
+
+    &.type04 {
+      &::after {
+        right: 0;
+        width: 100%;
+        height: 100%;
+      }
+    }
+
+    &.type05 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+      }
+
+      &::after {
+        left: -5%;
+        width: 90%;
+        height: 105%;
+        border-radius: 0 50% 50% 0;
+      }
+    }
+
+    &.type06 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $baseColr;
+      }
+
+      &::after {
+        right: -9%;
+        width: 70%;
+        height: 130%;
+        border-radius: 50% 0 0 50%;
+        background-color: #000;
+      }
+    }
+
+    &.type07 {
+      &::before {
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $baseColr;
+      }
+
+      &::after {
+        right: -10%;
+        width: 88%;
+        height: 88%;
+        background-color: #000;
+      }
+    }
+  }
 }
 
 .intro {
   position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
   height: 100vh;
-  padding: 100px;
+  padding: 100px 100px 280px;
   background-color: #000;
   color: $baseColr;
   text-transform: uppercase;
@@ -257,6 +354,7 @@ a {
   > * {
     display: flex;
     justify-content: center;
+    position: relative;
   }
 
   *::selection {
@@ -282,6 +380,89 @@ a {
     }
   }
 
+  .moon_list {
+    position: absolute;
+    top: 125px;
+    left: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    width: 80%;
+    column-gap: 20px;
+    transform: translateX(-50%);
+
+    li {
+      width: 10%;
+      height: 85px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      &.active {
+        figure {
+          text-shadow: 0px 0px 10px #ffd974, 0px 0px 5px #ffd974;
+        }
+
+        strong,
+        span,
+        p {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
+
+      &:nth-child(2),
+      &:nth-child(7) {
+        transform: translateY(25px);
+      }
+
+      &:nth-child(3),
+      &:nth-child(6) {
+        transform: translateY(50px);
+      }
+
+      &:nth-child(4),
+      &:nth-child(5) {
+        transform: translateY(70px);
+      }
+    }
+
+    strong,
+    span {
+      display: block;
+      font-size: 12px;
+      font-weight: 300;
+      opacity: 0;
+      transition: opacity 0.5s linear;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    span {
+      width: 150%;
+    }
+
+    p {
+      opacity: 0;
+      margin-top: 5px;
+      font-size: 14px;
+      width: 220%;
+      word-break: keep-all;
+      transition: opacity 0.5s linear;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    figure {
+      font-size: 50px;
+      font-family: $emojFont;
+      font-weight: 300;
+      margin-bottom: 10px;
+      transition: text-shadow 0.5s linear;
+      cursor: pointer;
+    }
+  }
+
   .deco_txt {
     position: absolute;
     top: 27px;
@@ -297,36 +478,32 @@ a {
     }
   }
 
-  > .slot_box {
-    position: relative;
-    font-family: $emojFont;
-    font-size: 130px;
-    font-weight: 300;
-    margin-bottom: 100px;
-    transition: text-shadow 1s linear;
-
-    &.shine {
-      text-shadow: 0 0 75px $baseColr, 0 0 5px $pointColr, 0 0 3px $baseColr;
-    }
+  canvas {
+    position: absolute;
+    bottom: 0;
+    display: block;
+    margin: 0;
+    mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, #000 50%, transparent 100%);
   }
+}
 
-  > .moon_list {
-    display: flex;
-    justify-content: center;
-
-    > li {
-      font-family: $emojFont;
-      font-weight: 300;
-    }
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
 
 .intro_myself {
   position: relative;
-  height: 70vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   overflow: hidden;
   padding: 0 50px;
   color: $baseColr;
@@ -365,14 +542,146 @@ a {
     color: #000;
   }
 
-  .deco_line {
-    display: block;
-    pointer-events: none;
-    width: 0px;
-    height: 1px;
-    margin: 0 auto;
-    background-color: $baseColr;
-    transition: width 0.5s linear;
+  .ani_icon {
+    position: relative;
+    width: 200px;
+    height: 100px;
+    border-bottom: 2px solid $baseColr;
+    margin-bottom: 30px;
+    overflow: hidden;
+
+    .sun {
+      position: absolute;
+      width: 100%;
+      height: 200%;
+      animation: rotate 4s linear infinite normal;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 50%;
+        width: 30px;
+        height: 30px;
+        margin-left: 15px;
+        border-radius: 50%;
+        background-color: #ffd974;
+        outline: 5px dotted #ffd974;
+        outline-offset: 5px;
+        animation: rotate 4s linear infinite reverse;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        right: 5px;
+        top: 50%;
+        width: 30px;
+        height: 30px;
+        box-sizing: border-box;
+        border-radius: 50%;
+        border-style: solid;
+        border-width: 0;
+        border-color: $baseColr;
+        background-color: $baseColr;
+        animation: rotate 4s linear infinite reverse;
+      }
+
+      &.type00 {
+        &:after {
+          outline: 2px solid $baseColr;
+          background-color: transparent;
+        }
+      }
+
+      &.type01 {
+        &:after {
+          border-right-width: 5px;
+          background-color: transparent;
+        }
+      }
+
+      &.type02 {
+        &:after {
+          border-right-width: 12px;
+          background-color: transparent;
+        }
+      }
+
+      &.type03 {
+        &:after {
+          border-left: 7px solid #000;
+        }
+      }
+
+      &.type05 {
+        &:after {
+          border-right: 7px solid #000;
+        }
+      }
+
+      &.type06 {
+        &:after {
+          border-left: 12px solid $baseColr;
+          background-color: #000;
+        }
+      }
+
+      &.type07 {
+        &:after {
+          border-left: 5px solid $baseColr;
+          background-color: #000;
+        }
+      }
+    }
+  }
+
+  .char {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      row-gap: 10px;
+      width: 150px;
+      height: 160px;
+
+      svg {
+        path {
+          stroke: #ffd974;
+          stroke-width: 3;
+          stroke-dashoffset: 220px;
+          stroke-dasharray: 220px;
+          fill: transparent;
+          transition: stroke-dashoffset 1s linear;
+        }
+      }
+
+      p {
+        width: 100%;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  &.active {
+    .char {
+      svg {
+        path {
+          stroke-dashoffset: 0px;
+
+          @for $i from 2 through 12 {
+            &:nth-child(#{$i}) {
+              transition-delay: 500ms * ($i * 0.1);
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -626,8 +935,38 @@ a {
 }
 
 // 탭 및 패드 사이즈
+@media (max-width: 1400px) and (max-height: 1200px) {
+  .intro {
+    .moon_list {
+      top: 100px;
+      column-gap: 0;
+      row-gap: 100px;
+
+      li {
+        width: 25%;
+
+        &:nth-child(2),
+        &:nth-child(3),
+        &:nth-child(4),
+        &:nth-child(5),
+        &:nth-child(6),
+        &:nth-child(7) {
+          transform: translateY(0);
+        }
+      }
+
+      span,
+      p {
+        width: 100%;
+      }
+    }
+  }
+}
+
 @media (max-width: 1400px) and (max-height: 1100px) {
   .intro {
+    padding: 50px 100px 80px;
+
     > .slot_box {
       font-size: 250px;
       margin-bottom: 150px;
@@ -640,6 +979,25 @@ a {
     > .slot_box {
       font-size: 250px;
       margin-bottom: 150px;
+    }
+  }
+
+  .intro_myself {
+    p {
+      width: 600px;
+    }
+
+    .ani_icon {
+      width: 250px;
+      height: 150px;
+    }
+
+    .char {
+      flex-wrap: wrap;
+
+      li {
+        width: 50%;
+      }
     }
   }
 }
@@ -715,21 +1073,65 @@ a {
       font-size: 180px;
       margin-bottom: 80px;
     }
+
+    .moon_list {
+      top: 80px;
+      column-gap: 0px;
+      row-gap: 80px;
+
+      figure {
+        margin-bottom: 5px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media (max-width: 850px) and (max-height: 1200px) {
+  .intro {
+    .moon_list {
+      top: 120px;
+      row-gap: 130px;
+    }
+  }
+}
+
+@media (max-width: 1400px) and (min-height: 1020px) {
+  .intro {
+    padding: 50px 120px 200px;
+  }
+}
+
+@media (max-width: 1200px) and (max-height: 800px) {
+  .intro {
+    .moon_list {
+      row-gap: 40px;
+
+      p {
+        display: none;
+      }
+    }
   }
 }
 
 //평균 모바일 사이즈
-@media (max-width: 800px) {
+@media (max-width: 800px) and (max-height: 900px) {
   body {
     width: 100%;
     font-size: 3.125vw;
   }
 
   .header {
-    padding: 1.5rem 1.5rem 0;
+    padding: 1rem 0.5rem 0 1rem;
 
     h1 {
-      font-size: 1.5rem;
+      width: 1rem;
+      height: 1rem;
+      font-size: 1.25rem;
+      line-height: 1.5rem;
       text-shadow: 0 0 5px #000;
     }
 
@@ -739,8 +1141,8 @@ a {
       }
 
       .navi_btn {
-        width: 2rem;
-        height: 2rem;
+        width: 1.75rem;
+        height: 1.75rem;
         box-shadow: -0.5rem 0 0 #000 inset;
       }
 
@@ -815,6 +1217,10 @@ a {
         }
       }
     }
+
+    .moon_box {
+      display: none;
+    }
   }
 
   .intro {
@@ -851,12 +1257,39 @@ a {
       margin-bottom: 5rem;
     }
 
+    .moon_list {
+      li {
+        display: none;
+        width: 80%;
+
+        strong,
+        span {
+          font-size: 1rem;
+        }
+
+        p {
+          display: block;
+          font-size: 0.85rem;
+          font-weight: 300;
+        }
+
+        figure {
+          font-size: 3rem;
+          margin-bottom: 0.5rem;
+        }
+
+        &.active {
+          display: block;
+        }
+      }
+    }
+
     .deco_txt {
       position: absolute;
-      top: 6vh;
-      width: 40%;
+      top: 2.75vh;
+      width: 70%;
       flex-wrap: wrap;
-      font-size: 2.1vh;
+      font-size: 1rem;
 
       span {
         margin-left: 0.2rem;
@@ -865,7 +1298,6 @@ a {
   }
 
   .intro_myself {
-    height: auto;
     padding: 0 1.5rem;
 
     h3 {
@@ -883,23 +1315,63 @@ a {
       font-size: 0.85rem;
       margin-bottom: 1.5rem;
     }
+
+    .ani_icon {
+      width: 12rem;
+      height: 6rem;
+    }
+
+    .char {
+      width: 100%;
+      flex-wrap: wrap;
+      row-gap: 1rem;
+      margin-bottom: 1rem;
+
+      li {
+        width: 40%;
+        height: 6rem;
+
+        svg {
+          width: 3.5rem;
+        }
+
+        &:nth-child(2),
+        &:nth-child(4) {
+          svg {
+            width: 4rem;
+          }
+        }
+      }
+    }
   }
 
   .site_list {
     padding: 4rem 1.5rem;
 
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      margin-left: 1rem;
+    }
+
     .site_list_wrap {
       .site_ul {
         > li {
+          padding: 2rem 0;
+
           figure {
             width: 18rem;
+
+            img {
+              border-radius: 1rem;
+            }
           }
 
           a {
-            width: 6rem;
-            height: 4rem;
-            padding: 0 0.5rem;
-            font-size: 0.8rem;
+            width: 8rem;
+            height: 3rem;
+            padding: 0;
+            font-size: 0.7rem;
           }
 
           h3,
@@ -918,9 +1390,10 @@ a {
           }
 
           h3 {
-            font-size: 2rem;
-            font-weight: 900;
-            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 0.5rem;
+            margin-bottom: 0rem;
           }
 
           ul {
@@ -928,22 +1401,18 @@ a {
               font-size: 1rem;
 
               &:nth-of-type(1) {
-                font-size: 1.2rem;
+                font-size: 1rem;
                 font-weight: 700;
               }
 
               &:nth-of-type(2) {
                 width: 90%;
-                padding: 0 0.5rem;
-                font-size: 1.1rem;
+                padding: 0;
+                font-size: 0.85rem;
               }
 
               &:nth-of-type(3) {
-                width: 90%;
-                padding: 0 0.75rem;
-                overflow: hidden;
-                font-size: 0.8rem;
-                line-height: 1.5rem;
+                display: none;
 
                 > p {
                   width: 100%;
@@ -951,8 +1420,8 @@ a {
               }
 
               &:nth-of-type(4) {
-                column-gap: 2rem;
-                margin-top: 2rem;
+                column-gap: 1rem;
+                margin-top: 1.5rem;
 
                 a {
                   margin: 0;
@@ -960,7 +1429,7 @@ a {
               }
 
               &:not(:last-child) {
-                margin-bottom: 1rem;
+                margin-bottom: 0.25rem;
               }
             }
           }
@@ -994,6 +1463,8 @@ a {
 
   .narrow {
     .intro {
+      padding: 6rem 2rem;
+
       &::before,
       &::after {
         position: absolute;
@@ -1021,11 +1492,11 @@ a {
 
       > p {
         &:nth-of-type(2) {
-          font-size: 4.5rem;
+          font-size: 4rem;
         }
 
         &:nth-of-type(3) {
-          font-size: 2.5rem;
+          font-size: 2rem;
         }
 
         &:nth-of-type(4) {
@@ -1048,6 +1519,24 @@ a {
           font-size: 1rem;
         }
       }
+    }
+  }
+}
+
+@media (max-width: 800px) and (min-height: 1000px) {
+  .intro {
+    padding: 2rem 2rem 6rem;
+
+    .moon_list {
+      top: 10rem;
+    }
+  }
+}
+
+@media (max-width: 330px) {
+  .intro {
+    .deco_txt {
+      font-size: 0.85rem;
     }
   }
 }

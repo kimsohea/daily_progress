@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon" />
     <link rel="icon" href="./img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="./css/base.css" />
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Emoji:wght@300..700&family=Noto+Sans+KR:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&family=Noto+Sans+TC:wght@100..900&display=swap"
       rel="stylesheet"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="./js/window.js" type="module"></script>
+    <script src="./js/script.js" type="module"></script>
     <title>日就月將</title>
   </head>
 
@@ -25,6 +24,7 @@
     <div class="wrapper">
       <header class="header">
         <h1>日就月將</h1>
+        <figure class="moon_box type00"></figure>
         <nav class="navi">
           <button class="navi_btn"></button>
           <ul class="nav_ul">
@@ -38,40 +38,128 @@
       </header>
       <main class="main">
         <section class="intro">
+          <canvas id="grass"></canvas>
           <p class="deco_txt">
-            오늘은 음력 <span class="lun_info"></span>일로
-            <span class="lun_name"></span>이 뜹니다.
+            오늘은 음력 <span class="lun_info"></span>일로 <span class="lun_name"></span>이 뜹니다.
           </p>
-          <h1 class="slot_box"></h1>
-          <ul class="moon_list">
-            <li>🌑</li>
-            <li>🌒</li>
-            <li>🌓</li>
-            <li>🌔</li>
-            <li>🌕</li>
-            <li>🌖</li>
-            <li>🌗</li>
-            <li>🌘</li>
-          </ul>
+          <ol class="moon_list">
+            <li class="active">
+              <figure>🌑</figure>
+              <strong>월삭 (합삭)</strong><span>New Moon</span>
+              <p>매달 1일에 뜨며 달이 태양과 지구 사이에 위치해 전체가 어둡게 보입니다.</p>
+            </li>
+            <li>
+              <figure>🌒</figure>
+              <strong>초승달</strong><span>Waxing Crecent</span>
+              <p>매달 3~7일에 뜨며 달이 태양과 지구 사이에 위치해 전체가 어둡게 보입니다.</p>
+            </li>
+            <li>
+              <figure>🌓</figure>
+              <strong>상현달</strong><span>First Quarter</span>
+              <p>매달 7~8일에 뜨며 달의 오른쪽 절반이 빛나게 보입니다.</p>
+            </li>
+            <li>
+              <figure>🌔</figure>
+              <strong>상현달</strong><span>Waxing Gibbous</span>
+              <p>매달 7~8일에 뜨며 달의 대부분이 빛나고 오른쪽에서 왼쪽으로 빛이 점점 커집니다.</p>
+            </li>
+            <li>
+              <figure>🌕</figure>
+              <strong>보름달</strong><span>Full Moon</span>
+              <p>매달 15일에 뜨며 달 전체가 밝게 빛납니다.</p>
+            </li>
+            <li>
+              <figure>🌖</figure>
+              <strong>하현달</strong><span>Waning Gibbous</span>
+              <p>매달 17~21일에 뜨며 왼쪽에서 오른쪽으로 빛이 점점 줄어듭니다.</p>
+            </li>
+            <li>
+              <figure>🌗</figure>
+              <strong>하현달</strong><span>Last Quarter</span>
+              <p>매달 22~23일에 뜨며 달의 왼쪽 절반이 빛나게 보입니다.</p>
+            </li>
+            <li>
+              <figure>🌘</figure>
+              <strong>그믐달</strong><span>Last Quarter</span>
+              <p>매달 24~28일에 뜨며 왼쪽 부분이 조금 빛나게 보입니다.</p>
+            </li>
+          </ol>
           <p>日就月將</p>
           <p>일취월장-하다</p>
           <p>동사 1. 나날이 다달이 자라거나 발전하다.</p>
           <p>웹 퍼블리셔 김소혜의 포트폴리오 사이트입니다</p>
         </section>
         <section class="intro_myself">
-          <span class="deco_line"></span>
-          <h3>날 일(日)/나아갈 취(就)/달 월(月)/장수 장(將)</h3>
+          <figure class="ani_icon">
+            <figure class="sun"></figure>
+          </figure>
+          <ul class="char">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="82" height="110" viewBox="0 0 82 110">
+                <path d="M2 1V110" />
+                <path d="M2 2H80L79.2571 109" />
+                <path d="M2 50H79" />
+                <path d="M2 100H79" />
+              </svg>
+              <p>날 일</p>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="121" height="123" viewBox="0 0 121 123">
+                <path d="M33 1V23" />
+                <path d="M2 23H63" />
+                <path d="M11 38L11 70" />
+                <path d="M11 39H55V70" />
+                <path d="M11 69H55" />
+                <path d="M33 69C33 83 33 110.4 33 114C33 120 29.96 120 27.68 120C27.072 120 18.8133 120 14 120" />
+                <path d="M15 81C13.5556 88.2973 6.33333 103.622 2 108" />
+                <path d="M48 80C50.619 84 56.2857 93.8 58 101" />
+                <path d="M63 41H119" />
+                <path d="M87.8181 1C90.0405 85.2236 71.5203 103.857 53 121" />
+                <path
+                  d="M90 51C90 69.3011 90 106.942 90 111.097C90 116.29 92.9744 120 95.9487 120C98.9231 120 108.59 120 112.308 120C116.026 120 119 117.032 119 113.323C119 110.355 119 101.204 119 96.2581"
+                />
+                <path d="M97 8C101.813 11.9111 112.352 21.7867 116 30" />
+              </svg>
+              <p>나아갈 취</p>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="102" height="113" viewBox="0 0 102 113">
+                <path d="M25.7672 0.5C25.7672 42.1216 30.1379 84.9865 1 111" />
+                <path
+                  d="M26 2H100C100 34.3516 100 99.9507 100 103.534C100 108.014 97.0101 111 93.2727 111C90.2828 111 75.5825 111 68.6061 111"
+                />
+                <path d="M27 34H100" />
+                <path d="M24 68H100" />
+              </svg>
+              <p>달 월</p>
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" width="122" height="120" viewBox="0 0 122 120">
+                <path d="M10 6V41H36" />
+                <path d="M36 0V120" />
+                <path d="M2 70H36" />
+                <path d="M12 70C12 81.1364 11.2308 104.894 2 119" />
+                <path d="M85 1C78.2909 9.31707 60.6982 27.161 44 32" />
+                <path d="M76 11H115C109 26.6716 86.2 52.0448 46 61" />
+                <path d="M69 18C75.6857 21.6538 90.84 31.7385 95 37" />
+                <path d="M54 28C59.5 32.25 72 42.4 78 49" />
+                <path d="M43 69H122" />
+                <path
+                  d="M102 48C102 67.1135 102 107.872 102 112.043C102 116.213 100.452 118 95.8065 118C92.0903 118 82.3871 118 78 118"
+                />
+                <path d="M57 81C61 84.9506 70.2 94.4815 75 101" />
+              </svg>
+              <p>장수 장</p>
+            </li>
+          </ul>
           <p>
-            시경(詩經) 주송(周頌) 경지(敬之)에서 유래한 사자성어로 ‘날마다
-            달마다 성장한다’는 뜻을 가집니다, 학문이 갈수록 빠르게 발전함을
-            이른다는 이야기로 해석되기도 합니다.
+            시경(詩經) 주송(周頌) 경지(敬之)에서 유래한 사자성어로 ‘날마다 달마다 성장한다’는 뜻을 가집니다, 학문이
+            갈수록 빠르게 발전함을 이른다는 이야기로 해석되기도 합니다.
           </p>
           <p>
-            이처럼 현재 만들어진 프레임워크, 라이브러리, 툴을 비롯한 많은
-            프론트엔드 기술 스택들과 앞으로 새롭게 생길 기술들을 나날이 습득하며
-            발전해 나가자는 마음가짐으로 성장하는 웹퍼블리셔입니다.
+            이처럼 현재 만들어진 프레임워크, 라이브러리, 툴을 비롯한 많은 프론트엔드 기술 스택들과 앞으로 새롭게 생길
+            기술들을 나날이 습득하며 발전해 나가자는 마음가짐으로 성장하는 웹퍼블리셔입니다.
           </p>
-          <span class="deco_line"></span>
         </section>
         <section class="site_list">
           <h3>단체 프로젝트</h3>
@@ -85,33 +173,26 @@
                 <ul>
                   <li>Vue.js, REST API, vuex</li>
                   <li>
-                    진행요소: 메인 페이지 Vue 버전 업그레이드(Vue3),
-                    이벤트페이지 진행, 마이페이지 구축, shop by api 연동
+                    진행요소: 메인 페이지 Vue 버전 업그레이드(Vue3), 이벤트페이지 진행, 마이페이지 구축, shop by api
+                    연동
                   </li>
                   <li>
                     <p>
-                      가방, 명품, 신발, 패션, 우먼, 아웃도어, 여행, 모바일테크,
-                      캠핑 등 스타일의 모든 것을 판매하고 있는 사이트입니다.
+                      가방, 명품, 신발, 패션, 우먼, 아웃도어, 여행, 모바일테크, 캠핑 등 스타일의 모든 것을 판매하고 있는
+                      사이트입니다.
                       <br />
-                      메인페이지 내의 요소들을 Vue2 에서 Vue3로 업그레이드하는
-                      작업을 진행하였으며, 기존 코드에서 javascript animate
-                      함수로 구현했던 단락을 setInterval 과 css 애니메이션으로
-                      내부 코드를 바꾸기도 했었고 이전의 퍼플리셔가 구현해 둔
-                      jquery를 최대한 제거해서 javascript로 동작할 수 있도록
-                      리뉴얼 작업을 진행했었습니다.
+                      메인페이지 내의 요소들을 Vue2 에서 Vue3로 업그레이드하는 작업을 진행하였으며, 기존 코드에서
+                      javascript animate 함수로 구현했던 단락을 setInterval 과 css 애니메이션으로 내부 코드를 바꾸기도
+                      했었고 이전의 퍼플리셔가 구현해 둔 jquery를 최대한 제거해서 javascript로 동작할 수 있도록 리뉴얼
+                      작업을 진행했었습니다.
                       <br />
-                      Vue3로 업그레이드 중에 상태 관리 라이브러리 vuex를
-                      mapGetter이 아닌 mapState로 변경하는 작업도 같이
-                      진행했었습니다.
+                      Vue3로 업그레이드 중에 상태 관리 라이브러리 vuex를 mapGetter이 아닌 mapState로 변경하는 작업도
+                      같이 진행했었습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://www.gabangpop.co.kr/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.gabangpop.co.kr/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://www.gabangpop.co.kr/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.gabangpop.co.kr/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
@@ -125,116 +206,85 @@
                   <li>진행요소: 메인 페이지 Vue 버전 업그레이드(Vue3)</li>
                   <li>
                     <p>
-                      글로벌 브랜드 파격세일, 본사 창고 대방출, 원가이하 쇼핑몰
-                      깔세몰 리퍼상품들을 판매하고 있는 사이트입니다.
+                      글로벌 브랜드 파격세일, 본사 창고 대방출, 원가이하 쇼핑몰 깔세몰 리퍼상품들을 판매하고 있는
+                      사이트입니다.
                       <br />
-                      메인페이지 내의 요소들을 Vue2 에서 Vue3로 업그레이드하는
-                      작업을 진행하였으며, 기존 코드에서 javascript animate
-                      함수로 구현했던 단락을 setInterval 과 css 애니메이션으로
-                      내부 코드를 바꾸기도 했었고 이전의 퍼플리셔가 구현해 둔
-                      jquery를 최대한 제거해서 javascript로 동작할 수 있도록
-                      리뉴얼 작업을 진행했었습니다.
+                      메인페이지 내의 요소들을 Vue2 에서 Vue3로 업그레이드하는 작업을 진행하였으며, 기존 코드에서
+                      javascript animate 함수로 구현했던 단락을 setInterval 과 css 애니메이션으로 내부 코드를 바꾸기도
+                      했었고 이전의 퍼플리셔가 구현해 둔 jquery를 최대한 제거해서 javascript로 동작할 수 있도록 리뉴얼
+                      작업을 진행했었습니다.
                       <br />
-                      Vue3로 업그레이드 중에 상태 관리 라이브러리 vuex를
-                      mapGetter이 아닌 mapState로 변경하는 작업도 같이
-                      진행했었습니다.
+                      Vue3로 업그레이드 중에 상태 관리 라이브러리 vuex를 mapGetter이 아닌 mapState로 변경하는 작업도
+                      같이 진행했었습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://www.ggalsemall.com/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.ggalsemall.com/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://www.ggalsemall.com/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.ggalsemall.com/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <figure>
-                  <img
-                    src="./img/oboz_img.png"
-                    alt="오보즈 코리아 사이트 이미지"
-                  />
+                  <img src="./img/oboz_img.png" alt="오보즈 코리아 사이트 이미지" />
                 </figure>
                 <h3>오보즈 코리아</h3>
                 <ul>
                   <li>Vue.js, REST API, vuex, Figma</li>
                   <li>
-                    진행요소: 메인 페이지 퍼블리싱 및 Vue 버전 업그레이드(Vue3),
-                    이벤트페이지 진행, shop by api 연동
+                    진행요소: 메인 페이지 퍼블리싱 및 Vue 버전 업그레이드(Vue3), 이벤트페이지 진행, shop by api 연동
                   </li>
                   <li>
                     <p>
-                      하이킹, 트레일 러닝 전문 브랜드 오보즈 풋웨어 코리아 공식
-                      온라인 스토어 True to the trail 사이트입니다.
+                      하이킹, 트레일 러닝 전문 브랜드 오보즈 풋웨어 코리아 공식 온라인 스토어 True to the trail
+                      사이트입니다.
                       <br />
-                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해
-                      데이터 연동작업을 진행했습니다. 운영을 지속하는 중에도
-                      추가 단락이 생기면 추가 단락을 만들어서 넣기도 하는 보수
-                      작업도 같이 진행했었습니다.
+                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해 데이터 연동작업을 진행했습니다. 운영을
+                      지속하는 중에도 추가 단락이 생기면 추가 단락을 만들어서 넣기도 하는 보수 작업도 같이
+                      진행했었습니다.
                       <br />
-                      기존 운영하던 사이트들에서 메인페이지와 일부 페이지를
-                      제외한 상품 전시 페이지라던지 공지사항같은 페이지 내
-                      아이콘 요소들을 빠르게 렌더링할 수 있도록 figma로 구현해서
-                      사이트 구축시 더 시간이 덜 소요되도록 작업을 했었습니다.
+                      기존 운영하던 사이트들에서 메인페이지와 일부 페이지를 제외한 상품 전시 페이지라던지 공지사항같은
+                      페이지 내 아이콘 요소들을 빠르게 렌더링할 수 있도록 figma로 구현해서 사이트 구축시 더 시간이 덜
+                      소요되도록 작업을 했었습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://www.obozfootwear.co.kr/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.obozfootwear.co.kr/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://www.obozfootwear.co.kr/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.obozfootwear.co.kr/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <figure>
-                  <img
-                    src="./img/marmot_img.png"
-                    alt="마모트 코리아 사이트 이미지"
-                  />
+                  <img src="./img/marmot_img.png" alt="마모트 코리아 사이트 이미지" />
                 </figure>
                 <h3>마모트 코리아</h3>
                 <ul>
                   <li>Vue.js, REST API, vuex, Figma</li>
                   <li>
-                    진행요소: 메인 페이지 퍼블리싱 및 Vue 버전 업그레이드(Vue3),
-                    이벤트페이지 진행, shop by api 연동
+                    진행요소: 메인 페이지 퍼블리싱 및 Vue 버전 업그레이드(Vue3), 이벤트페이지 진행, shop by api 연동
                   </li>
                   <li>
                     <p>
-                      고어텍스 근본 브랜드 마모트코리아, 아웃도어 액티비티에
-                      최적화된 의류, 가방, 모자 등 자유롭고 독창적이며 비일상을
-                      체험할 수 있는 스타일을 제공하는 사이트입니다.
+                      고어텍스 근본 브랜드 마모트코리아, 아웃도어 액티비티에 최적화된 의류, 가방, 모자 등 자유롭고
+                      독창적이며 비일상을 체험할 수 있는 스타일을 제공하는 사이트입니다.
                       <br />
-                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해
-                      데이터 연동작업을 진행했습니다. 운영을 지속하는 중에도
-                      추가 단락이 생기면 추가 단락을 만들어서 넣기도 하는 보수
-                      작업도 같이 진행했었습니다.
+                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해 데이터 연동작업을 진행했습니다. 운영을
+                      지속하는 중에도 추가 단락이 생기면 추가 단락을 만들어서 넣기도 하는 보수 작업도 같이
+                      진행했었습니다.
                       <br />
-                      사이트 내의 Find A Store 페이지 리뉴얼을 하면서 shop by
-                      api를 사용했습니다.
+                      사이트 내의 Find A Store 페이지 리뉴얼을 하면서 shop by api를 사용했습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://www.marmotkorea.kr/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.marmotkorea.kr/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://www.marmotkorea.kr/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.marmotkorea.kr/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <figure>
-                  <img
-                    src="./img/wearlounge_img.png"
-                    alt="웨어라운지 사이트 이미지"
-                  />
+                  <img src="./img/wearlounge_img.png" alt="웨어라운지 사이트 이미지" />
                 </figure>
                 <h3>웨어라운지</h3>
                 <ul>
@@ -244,18 +294,13 @@
                     <p>
                       브랜드 큐레이션 편집샵 웨어라운지 사이트 입니다.
                       <br />
-                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해
-                      데이터 연동작업을 진행했습니다. pc 사이트가 가로값의
-                      유동성을위해 css 작업 중 %로 계산해서 구현한 사이트입니다.
+                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해 데이터 연동작업을 진행했습니다. pc 사이트가
+                      가로값의 유동성을위해 css 작업 중 %로 계산해서 구현한 사이트입니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://wearlounge.com/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.wearlounge.com/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://wearlounge.com/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.wearlounge.com/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
@@ -266,90 +311,62 @@
                 <h3>WLAB</h3>
                 <ul>
                   <li>Vue.js, REST API, vuex, Figma</li>
-                  <li>
-                    진행요소: 메인 페이지 퍼블리싱, shop by api 연동, 마이페이지
-                    구현
-                  </li>
+                  <li>진행요소: 메인 페이지 퍼블리싱, shop by api 연동, 마이페이지 구현</li>
                   <li>
                     <p>
-                      No1. 고커버/고발색 페이스메이크업과 메이크업핏을 살리는
-                      하이브리드 스킨케어 전문 브랜드 사이트 입니다.
+                      No1. 고커버/고발색 페이스메이크업과 메이크업핏을 살리는 하이브리드 스킨케어 전문 브랜드 사이트
+                      입니다.
                       <br />
-                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해
-                      데이터 연동작업을 진행했습니다. 이 사이트 내의
-                      회원등급페이지 및 브랜드 스토리 페이지를 구현 했습니다.
+                      메인페이지 요소들을 퍼블리싱 후 shop by api를 이용해 데이터 연동작업을 진행했습니다. 이 사이트
+                      내의 회원등급페이지 및 브랜드 스토리 페이지를 구현 했습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://wlab.co.kr/" target="_blank"
-                      >PC 사이트 바로가기</a
-                    >
-                    <a href="https://m.wlab.co.kr/" target="_blank"
-                      >모바일 사이트 바로가기</a
-                    >
+                    <a href="https://wlab.co.kr/" target="_blank">PC 사이트 바로가기</a>
+                    <a href="https://m.wlab.co.kr/" target="_blank">모바일 사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <figure>
-                  <img
-                    src="./img/aykasa_img.png"
-                    alt="아이카사 사이트 이미지"
-                  />
+                  <img src="./img/aykasa_img.png" alt="아이카사 사이트 이미지" />
                 </figure>
                 <h3>아이카사 코리아</h3>
                 <ul>
                   <li>React, TypeScript, Gulp.js</li>
-                  <li>
-                    진행요소: Gulp.js를 이용한 사이트 퍼블리싱 및 프로젝트 일부
-                    유지 보수
-                  </li>
+                  <li>진행요소: Gulp.js를 이용한 사이트 퍼블리싱 및 프로젝트 일부 유지 보수</li>
                   <li>
                     <p>
-                      아이카사 본사와 국내 독점 수입·판매 (Exculsive)를 맺는
-                      공식 사이트 입니다.
+                      아이카사 본사와 국내 독점 수입·판매 (Exculsive)를 맺는 공식 사이트 입니다.
                       <br />
-                      Gulp.js 를 이용해 메인페이지 요소들의 퍼블리싱을
-                      진행했으며 React.js로 배포된 후 일부 요소들의 유지 및
-                      보수작업을 진행했습니다.
+                      Gulp.js 를 이용해 메인페이지 요소들의 퍼블리싱을 진행했으며 React.js로 배포된 후 일부 요소들의
+                      유지 및 보수작업을 진행했습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://aykasa-korea.co.kr/" target="_blank"
-                      >사이트 바로가기</a
-                    >
+                    <a href="https://aykasa-korea.co.kr/" target="_blank">사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
               <li>
                 <figure>
-                  <img
-                    src="./img/wetoo_img.png"
-                    alt="엔에이치엔위투 사이트 이미지"
-                  />
+                  <img src="./img/wetoo_img.png" alt="엔에이치엔위투 사이트 이미지" />
                 </figure>
                 <h3>NHN Wetoo</h3>
                 <ul>
                   <li>React, TypeScript, Gulp.js</li>
-                  <li>
-                    진행요소: Gulp.js를 이용한 사이트 퍼블리싱 및 프로젝트 일부
-                    유지 보수
-                  </li>
+                  <li>진행요소: Gulp.js를 이용한 사이트 퍼블리싱 및 프로젝트 일부 유지 보수</li>
                   <li>
                     <p>
-                      NHN wetoo는 모든 고객들이 감각적인 개성과 각기 다른 취향을
-                      마음껏 연출하고 표현할 수 있도록 맞춤형 라이프스타일을
-                      공유하고 제안하는 E-Commerce 전문기업 공식 사이트 입니다.
+                      NHN wetoo는 모든 고객들이 감각적인 개성과 각기 다른 취향을 마음껏 연출하고 표현할 수 있도록 맞춤형
+                      라이프스타일을 공유하고 제안하는 E-Commerce 전문기업 공식 사이트 입니다.
                       <br /><br />
-                      Gulp.js 를 이용해 메인페이지 요소들의 퍼블리싱을
-                      진행했으며 React.js로 배포된 후 일부 요소들의 유지 및
-                      보수작업을 진행했습니다.
+                      Gulp.js 를 이용해 메인페이지 요소들의 퍼블리싱을 진행했으며 React.js로 배포된 후 일부 요소들의
+                      유지 및 보수작업을 진행했습니다.
                     </p>
                   </li>
                   <li>
-                    <a href="https://nhnwetoo.com/" target="_blank"
-                      >사이트 바로가기</a
-                    >
+                    <a href="https://nhnwetoo.com/" target="_blank">사이트 바로가기</a>
                   </li>
                 </ul>
               </li>
@@ -362,32 +379,142 @@
             <ul class="site_ul">
               <li>
                 <figure>
-                  <img
-                    src="./img/aladin_mockup.png"
-                    alt="알라딘 리뉴얼 페이지 목업"
-                  />
+                  <img src="./img/aladin_mockup.png" alt="알라딘 리뉴얼 페이지 목업" />
                 </figure>
                 <h4>React+TypeScript로 구현한 알라딘 반응형 사이트</h4>
                 <p>
-                  기존 알라딘의 답답한 프레임에서 벗어나 트렌드에 맞춰 넓찍하고
-                  단순한 모양으로 리디자인했습니다. 정리되지 않은 기존 메뉴단을
-                  병합,축소,그룹화 하면서 인터페이스를 한눈에 알아볼 수 있도록
-                  깔끔한 디자인으로 변경했으며 React와 TypeScript를 이용해서
-                  구현했으며 API를 이용해 제품이미지, 서적명과 같은 데이터들을
-                  수신합니다.
+                  기존 알라딘의 답답한 프레임에서 벗어나 트렌드에 맞춰 넓찍하고 단순한 모양으로 리디자인했습니다.
+                  정리되지 않은 기존 메뉴단을 병합,축소,그룹화 하면서 인터페이스를 한눈에 알아볼 수 있도록 깔끔한
+                  디자인으로 변경했으며 React와 TypeScript를 이용해서 구현했으며 API를 이용해 제품이미지, 서적명과 같은
+                  데이터들을 수신합니다.
                   <br />
                   <br />
-                  메인페이지와 서적, 굿즈 등 서브페이지도 같이 구현 했으며
-                  제품들마다의 상세페이지도 구현했으며 대중적인 웹 쇼핑몰에서 볼
-                  수 있는 버튼형 리스트 및 서브메뉴 구현을 통해 심플한 모양으로
-                  재구성했습니다
+                  메인페이지와 서적, 굿즈 등 서브페이지도 같이 구현 했으며 제품들마다의 상세페이지도 구현했으며 대중적인
+                  웹 쇼핑몰에서 볼 수 있는 버튼형 리스트 및 서브메뉴 구현을 통해 심플한 모양으로 재구성했습니다
 
-                  <a
-                    href="https://kimsohea.github.io/react-deploy/"
-                    target="_blank"
-                  >
-                    사이트 바로가기
-                  </a>
+                  <a href="https://kimsohea.github.io/react-deploy/" target="_blank"> 사이트 바로가기 </a>
+                </p>
+              </li>
+            </ul>
+          </article>
+        </section>
+        <section class="site_list my_project">
+          <h3>개인 작업물</h3>
+          <article class="site_list_wrap">
+            <ul class="site_ul">
+              <li>
+                <figure>
+                  <img src="./img/class01.png" alt="영어 학습 듣기형 01" />
+                </figure>
+                <h4>초등학생 영어 학습 게임(듣기형)</h4>
+                <p>
+                  초등학생 영어 학습을 돕기 위해 만든 작업물입니다. 정답을 맞출 때와 틀렸을때의 효과를 구현했습니다.
+                  듣기 이전 정오답 채점 유무와 gsap을 이용해 캐릭터들의 움직임을 적용했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_01.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class02.png" alt="영어 학습 듣기형 02" />
+                </figure>
+                <h4>초등학생 영어 학습 게임(듣기형)</h4>
+                <p>
+                  초등학생 영어 학습을 돕기 위해 만든 작업물입니다. 정답을 맞출 때와 틀렸을때의 효과를 구현했습니다.
+                  듣기 이전 정오답 채점 유무와 gsap을 이용해 캐릭터들의 움직임을 적용했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_02.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class04.png" alt="영어 학습 쓰기형 01" />
+                </figure>
+                <h4>초등학생 영어 학습 게임(쓰기형)</h4>
+                <p>
+                  초등학생 영어 학습을 돕기 위해 만든 작업물입니다. 정답을 맞출 때와 틀렸을때의 효과를 구현했습니다.
+                  드래그앤드롭을 통해 원하는 위치에 문자를 재배열하고 그렇게 재배열한 문자의 정오답 유무를 채점합니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_04.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class05.png" alt="영어 학습 쓰기형 02" />
+                </figure>
+                <h4>초등학생 영어 학습 게임(쓰기형)</h4>
+                <p>
+                  초등학생 영어 학습을 돕기 위해 만든 작업물입니다. 정답을 맞출 때와 틀렸을때의 효과를 구현했습니다.
+                  빈칸의 문자를 채우고 채워진 값의 정오답에 따라 다른 인터랙션을 구현했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_05.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class06.png" alt="영어 학습 쓰기형 03" />
+                </figure>
+                <h4>초등학생 영어 학습 게임(쓰기형)</h4>
+                <p>
+                  초등학생 영어 학습을 돕기 위해 만든 작업물입니다. 정답을 맞출 때와 틀렸을때의 효과를 구현했습니다.
+                  채워진 값의 정오답에 따라 다른 인터랙션을 구현했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_06.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class07.png" alt="정보 학습 게임 01" />
+                </figure>
+                <h4>중학생 정보 학습 게임</h4>
+                <p>
+                  중학생 정보 학습을 돕기 위해 만든 작업물입니다. 캐릭터 순서대로 주제에 대한 이야기를 띄우며 해당
+                  주제에 맞지 않는 캐릭터를 선택 후 주제를 맞추면 다음으로 진행되는 방식을 구현했습니다. 1번 틀리면
+                  기회를 주고 2번 틀리면 오답 팝업을 띄워 다음 순서로 넘어갈 수 있도록 구현했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_11.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class08.png" alt="정보 학습 게임 02" />
+                </figure>
+                <h4>중학생 정보 학습 게임</h4>
+                <p>
+                  중학생 정보 학습을 돕기 위해 만든 작업물입니다. 빈칸의 자음에 맞는 단어를 쓰고 그 단어를 맞추면 다음
+                  문제로 넘어갑니다. 한번씩 틀릴때마다 보기의 글자가 채워집니다. 글자수만큼의 찬스가 있습니다
+                  <a href="https://kimsohea.github.io/monobrain/template_12.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class09.png" alt="정보 학습 게임 03" />
+                </figure>
+                <h4>중학생 정보 학습 게임</h4>
+                <p>
+                  중학생 정보 학습을 돕기 위해 만든 작업물입니다. 십자말풀이 게임으로 좌측의 빈칸을 클릭하면 우측에 해당
+                  단어의 힌트가 뜹니다. 하단의 키보드를 클릭해서 맞는 단어를 맞추는 게임으로 만약 실수로 단어를 눌렀을
+                  시 풀고있던 칸을 클릭해서 빈칸으로 다시 비울수도 있습니다. 맞추면 겹쳐진 빈칸 글자가 회색으로
+                  띄워집니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_13.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class10.png" alt="정보 학습 게임 04" />
+                </figure>
+                <h4>중학생 정보 학습 게임</h4>
+                <p>
+                  중학생 정보 학습을 돕기 위해 만든 작업물입니다. 드래그앤드롭으로 구현된 게임으로 빈칸에 맞는 단어를
+                  채우는 게임입니다. 한번 틀렸을땐 회색 초성으로 힌트를 주며 두번틀렸을땐 다음으로 넘어가는 팝업을
+                  띄웁니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_14.html" target="_blank">사이트 바로가기</a>
+                </p>
+              </li>
+              <li>
+                <figure>
+                  <img src="./img/class11.png" alt="정보 학습 게임 05" />
+                </figure>
+                <h4>중학생 정보 학습 게임</h4>
+                <p>
+                  중학생 정보 학습을 돕기 위해 만든 작업물입니다. 지도상에 있는 문제를 풀어나가는 게임으로 문제의 점수를
+                  누적해 몇개를 맞추었는지 확인하는 기능을 넣었습니다. 문제를 틀릴 때와 맞출 때의 인터랙션을
+                  구현했습니다.
+                  <a href="https://kimsohea.github.io/monobrain/template_15.html" target="_blank">사이트 바로가기</a>
                 </p>
               </li>
             </ul>
@@ -407,9 +534,7 @@
             <p>github Id: kimsohea4425@gmail.com</p>
           </li>
           <li>
-            <a href="https://github.com/kimsohea" target="_blank">
-              github page 바로가기
-            </a>
+            <a href="https://github.com/kimsohea" target="_blank"> github page 바로가기 </a>
           </li>
         </ul>
       </footer>

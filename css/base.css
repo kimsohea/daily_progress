@@ -1,0 +1,46 @@
+main,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+span,
+section,
+div,
+header,
+footer,
+article,
+figure,
+button {
+  margin: 0;
+  padding: 0;
+  font-family: "Noto Sans KR", "Noto Sans TC", sans-serif;
+}
+
+section {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+}
+
+ul,
+ol {
+  list-style: none;
+  box-sizing: border-box;
+}
+ul li,
+ol li {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}/*# sourceMappingURL=base.css.map */
